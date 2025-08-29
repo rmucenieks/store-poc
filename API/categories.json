@@ -16,7 +16,7 @@
       "id": "wifi",
       "name": "WiFi",
       "icon": "wifi",
-      "products": "wifi-products"
+      "products": "wifi-products.json"
     },
     {
       "id": "camera-security",
