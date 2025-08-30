@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct ProductDetailView: View {
-    let product: Product
-    @StateObject private var apiService = APIService()
+    @StateObject private var viewModel: ProductDetailViewModel
+    
+    init(product: Product) {
+        self._viewModel = StateObject(wrappedValue: ProductDetailViewModel(product: product))
+    }
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 // Product Image
-                AsyncImage(url: apiService.getImageURL(for: product.imageUrl)) { image in
+                AsyncImage(url: viewModel.imageURL) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -34,11 +37,11 @@ struct ProductDetailView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     // Product Title and Price
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(product.name)
+                        Text(viewModel.product.name)
                             .font(.title)
                             .fontWeight(.bold)
                         
-                        Text("€\(String(format: "%.2f", product.price))")
+                        Text("€\(String(format: "%.2f", viewModel.product.price))")
                             .font(.title2)
                             .fontWeight(.semibold)
                             .foregroundColor(.blue)
@@ -50,7 +53,7 @@ struct ProductDetailView: View {
                             .font(.headline)
                             .fontWeight(.semibold)
                         
-                        Text(product.description)
+                        Text(viewModel.product.description)
                             .font(.body)
                             .foregroundColor(.secondary)
                     }
@@ -65,11 +68,11 @@ struct ProductDetailView: View {
                             HStack {
                                 Image(systemName: "wifi")
                                     .foregroundColor(.blue)
-                                Text("WiFi Standard: \(product.wifiStandard)")
+                                Text("WiFi Standard: \(viewModel.product.wifiStandard)")
                                     .font(.subheadline)
                             }
                             
-                            if let frequency = product.frequency {
+                            if let frequency = viewModel.product.frequency {
                                 HStack {
                                     Image(systemName: "waveform")
                                         .foregroundColor(.blue)

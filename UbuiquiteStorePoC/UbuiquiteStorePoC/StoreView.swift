@@ -8,20 +8,7 @@
 import SwiftUI
 
 struct StoreView: View {
-    @StateObject private var apiService = APIService()
-    @State private var selectedCategory: Category?
-    @State private var searchText = ""
-    
-    var filteredProducts: [Product] {
-        if searchText.isEmpty {
-            return apiService.products
-        } else {
-            return apiService.products.filter { product in
-                product.name.localizedCaseInsensitiveContains(searchText) ||
-                product.description.localizedCaseInsensitiveContains(searchText)
-            }
-        }
-    }
+    @StateObject private var viewModel = StoreViewModel()
     
     var body: some View {
         NavigationView {
@@ -35,7 +22,7 @@ struct StoreView: View {
                         bannerView
                         
                         // Categories
-                        if apiService.isLoadingCategories {
+                        if viewModel.isLoadingCategories {
                             VStack {
                                 ProgressView()
                                     .scaleEffect(1.2)
@@ -45,12 +32,12 @@ struct StoreView: View {
                                     .padding(.top, 8)
                             }
                             .frame(maxWidth: .infinity, minHeight: 100)
-                        } else if !apiService.categories.isEmpty {
+                        } else if !viewModel.categories.isEmpty {
                             categoriesView
                         }
                         
                         // Error Message
-                        if let errorMessage = apiService.errorMessage {
+                        if let errorMessage = viewModel.errorMessage {
                             VStack(spacing: 12) {
                                 Image(systemName: "exclamationmark.triangle")
                                     .font(.system(size: 32))
@@ -67,11 +54,7 @@ struct StoreView: View {
                                 
                                 Button("Retry") {
                                     Task {
-                                        await apiService.fetchCategories()
-                                        if let firstCategory = apiService.categories.first {
-                                            selectedCategory = firstCategory
-                                            await apiService.fetchProducts(for: firstCategory)
-                                        }
+                                        await viewModel.loadCategories()
                                     }
                                 }
                                 .buttonStyle(.borderedProminent)
@@ -90,11 +73,7 @@ struct StoreView: View {
             .navigationBarHidden(true)
         }
         .task {
-            await apiService.fetchCategories()
-            if let firstCategory = apiService.categories.first {
-                selectedCategory = firstCategory
-                await apiService.fetchProducts(for: firstCategory)
-            }
+            await viewModel.loadCategories()
         }
     }
     
@@ -113,12 +92,12 @@ struct StoreView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.secondary)
                 
-                TextField("Search products...", text: $searchText)
+                TextField("Search products...", text: $viewModel.searchText)
                     .textFieldStyle(PlainTextFieldStyle())
                 
-                if !searchText.isEmpty {
+                if !viewModel.searchText.isEmpty {
                     Button(action: {
-                        searchText = ""
+                        viewModel.searchText = ""
                     }) {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.secondary)
@@ -176,14 +155,13 @@ struct StoreView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 12) {
-                    ForEach(apiService.categories) { category in
+                    ForEach(viewModel.categories) { category in
                         CategoryCard(
                             category: category,
-                            isSelected: selectedCategory?.id == category.id
+                            isSelected: viewModel.selectedCategory?.id == category.id
                         ) {
-                            selectedCategory = category
                             Task {
-                                await apiService.fetchProducts(for: category)
+                                await viewModel.selectCategory(category)
                             }
                         }
                     }
@@ -202,16 +180,16 @@ struct StoreView: View {
                 
                 Spacer()
                 
-                if !apiService.products.isEmpty {
-                    Text("\(filteredProducts.count) items")
+                if !viewModel.products.isEmpty {
+                    Text("\(viewModel.filteredProducts.count) items")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
             }
             
-            if apiService.isLoadingProducts {
+            if viewModel.isLoadingProducts {
                 loadingView
-            } else if filteredProducts.isEmpty {
+            } else if viewModel.filteredProducts.isEmpty {
                 emptyStateView
             } else {
                 productsGrid
@@ -254,9 +232,9 @@ struct StoreView: View {
             GridItem(.flexible(), spacing: 16),
             GridItem(.flexible(), spacing: 16)
         ], spacing: 16) {
-            ForEach(filteredProducts) { product in
+            ForEach(viewModel.filteredProducts) { product in
                 NavigationLink(destination: ProductDetailView(product: product)) {
-                    ProductCard(product: product, apiService: apiService)
+                    ProductCard(product: product)
                 }
                 .buttonStyle(PlainButtonStyle())
             }
@@ -265,7 +243,7 @@ struct StoreView: View {
 }
 
 struct CategoryCard: View {
-    let category: Category
+    let category: ProductCategory
     let isSelected: Bool
     let onTap: () -> Void
     
@@ -291,25 +269,37 @@ struct CategoryCard: View {
 
 struct ProductCard: View {
     let product: Product
-    let apiService: APIService
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            // Product Image
-            AsyncImage(url: apiService.getImageURL(for: product.imageUrl)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            } placeholder: {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.2))
-                    .overlay(
-                        ProgressView()
-                            .scaleEffect(0.8)
-                    )
+            // Product Image with Partner Program Badge
+            ZStack(alignment: .topTrailing) {
+                AsyncImage(url: URL(string: "https://raw.githubusercontent.com/rmucenieks/store-poc/main/API/store-pics/\(product.imageUrl)")) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } placeholder: {
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.2))
+                        .overlay(
+                            ProgressView()
+                                .scaleEffect(0.8)
+                        )
+                }
+                .frame(height: 120)
+                .cornerRadius(8)
+                
+                // Partner Program Badge
+                if product.partnerProgram {
+                    Image("PartnerProgram")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .padding(4)
+                        .background(Color.white)
+                        .clipShape(Circle())
+                        .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 1)
+                }
             }
-            .frame(height: 120)
-            .cornerRadius(8)
             
             // Product Info
             VStack(alignment: .leading, spacing: 4) {

@@ -8,7 +8,7 @@
 import Foundation
 
 struct CategoryList: Decodable {
-    let categories: [Category]
+    let categories: [ProductCategory]
 }
 
 struct ProductList: Decodable {
@@ -17,7 +17,7 @@ struct ProductList: Decodable {
 
 
 
-struct Category: Identifiable, Decodable {
+struct ProductCategory: Identifiable, Decodable {
     let id: String
     let name: String
     let icon: String
@@ -32,6 +32,7 @@ struct Product: Identifiable, Decodable {
     let wifiStandard: String
     let frequency: String?
     let imageUrl: String
+    let partnerProgram: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -41,5 +42,6 @@ struct Product: Identifiable, Decodable {
         case wifiStandard
         case frequency
         case imageUrl
+        case partnerProgram
     }
 }

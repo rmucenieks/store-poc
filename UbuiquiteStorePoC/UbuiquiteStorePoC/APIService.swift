@@ -7,66 +7,32 @@
 
 import Foundation
 
-class APIService: ObservableObject {
+class APIService: APIServiceProtocol {
     private let baseURL = "https://raw.githubusercontent.com/rmucenieks/store-poc/main/API"
     
-    @Published var categories: [Category] = []
-    @Published var products: [Product] = []
-    @Published var isLoadingCategories = false
-    @Published var isLoadingProducts = false
-    @Published var errorMessage: String?
-    
-    func fetchCategories() async {
-        await MainActor.run {
-            isLoadingCategories = true
-            errorMessage = nil
-        }
-        
+    func fetchCategories() async -> Result<[ProductCategory], Error> {
         do {
             let url = URL(string: "\(baseURL)/categories.json")!
             let (data, _) = try await URLSession.shared.data(from: url)
             let categoriesList = try JSONDecoder().decode(CategoryList.self, from: data)
-
-            await MainActor.run {
-                self.categories = categoriesList.categories
-                isLoadingCategories = false
-            }
+            return .success(categoriesList.categories)
         } catch {
-            await MainActor.run {
-                self.errorMessage = "Failed to load categories: \(error.localizedDescription)"
-                isLoadingCategories = false
-            }
+            return .failure(error)
         }
     }
     
-    func fetchProducts(for category: Category) async {
+    func fetchProducts(for category: ProductCategory) async -> Result<[Product], Error> {
         guard let productsFileName = category.products, !productsFileName.isEmpty else {
-            await MainActor.run {
-                self.products = []
-                isLoadingProducts = false
-            }
-            return
-        }
-        
-        await MainActor.run {
-            isLoadingProducts = true
-            errorMessage = nil
+            return .success([])
         }
         
         do {
             let url = URL(string: "\(baseURL)/\(productsFileName)")!
             let (data, _) = try await URLSession.shared.data(from: url)
             let productList = try JSONDecoder().decode(ProductList.self, from: data)
-
-            await MainActor.run {
-                self.products = productList.products
-                isLoadingProducts = false
-            }
+            return .success(productList.products)
         } catch {
-            await MainActor.run {
-                self.errorMessage = "Failed to load products: \(error.localizedDescription)"
-                isLoadingProducts = false
-            }
+            return .failure(error)
         }
     }
     
