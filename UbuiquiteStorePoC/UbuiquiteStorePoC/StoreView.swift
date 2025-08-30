@@ -10,16 +10,26 @@ import SwiftUI
 struct StoreView: View {
     @StateObject private var viewModel = StoreViewModel()
     
-    var body: some View {
+    private var horizontalPadding: CGFloat {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return 32 // More padding for iPad
+        } else {
+            return 16 // Standard padding for iPhone
+        }
+    }
+    
+        var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 // Header
                 headerView
                 
-                ScrollView {
-                    VStack(spacing: 20) {
-                        // Banner
-                        bannerView
+                // Content area with gradient overlay
+                ZStack(alignment: .top) {
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            // Banner
+                            bannerView
                         
                         // Categories
                         if viewModel.isLoadingCategories {
@@ -28,7 +38,7 @@ struct StoreView: View {
                                     .scaleEffect(1.2)
                                 Text("Loading categories...")
                                     .font(.subheadline)
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(Color(.secondaryLabel))
                                     .padding(.top, 8)
                             }
                             .frame(maxWidth: .infinity, minHeight: 100)
@@ -67,18 +77,29 @@ struct StoreView: View {
                         // Products
                         productsView
                     }
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, horizontalPadding)
                 }
+                
+                // Gradient overlay - positioned above scroll content
+                LinearGradient(
+                    gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground).opacity(0)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .frame(height: 20)
+                .allowsHitTesting(false) // Allow touches to pass through to scroll view
+            }
             }
             .navigationBarHidden(true)
         }
+        .navigationViewStyle(StackNavigationViewStyle()) // Force full screen on iPad
         .task {
             await viewModel.loadCategories()
         }
     }
     
     private var headerView: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 20) {
             HStack {
                 Text("UniFi")
                     .font(.largeTitle)
@@ -106,45 +127,53 @@ struct StoreView: View {
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
-            .background(Color.gray.opacity(0.1))
+            .background(Color(.systemGray6))
             .cornerRadius(8)
         }
-        .padding(.horizontal, 16)
+        .padding(.horizontal, horizontalPadding)
         .padding(.top, 8)
+        .padding(.bottom, 16)
     }
     
     private var bannerView: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Introducing")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                
-                Text("UniFi U7 Pro")
-                    .font(.title)
-                    .fontWeight(.bold)
-                
-                Text("WiFi 7 for high-performance networks")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+        Button(action: {
+            if let url = URL(string: "https://store.ui.com/us/en") {
+                UIApplication.shared.open(url)
             }
-            
-            Spacer()
-            
-            // Placeholder for U7 Pro image
-            Circle()
-                .fill(Color.blue.opacity(0.1))
-                .frame(width: 80, height: 80)
-                .overlay(
-                    Text("U7")
-                        .font(.title2)
+        }) {
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Introducing")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    Text("UniFi U7 Pro")
+                        .font(.title)
                         .fontWeight(.bold)
-                        .foregroundColor(.blue)
-                )
-        }
-        .padding(20)
-        .background(Color.blue.opacity(0.05))
+                    
+                    Text("WiFi 7 for high-performance networks")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                // Placeholder for U7 Pro image
+                Circle()
+                    .fill(Color.blue.opacity(0.1))
+                    .frame(width: 80, height: 80)
+                    .overlay(
+                        Text("U7")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.blue)
+                    )
+            }
+                    .padding(20)
+        .background(Color.blue.opacity(0.1))
         .cornerRadius(12)
+        }
+        .buttonStyle(BannerButtonStyle())
     }
     
     private var categoriesView: some View {
@@ -181,9 +210,9 @@ struct StoreView: View {
                 Spacer()
                 
                 if !viewModel.products.isEmpty {
-                    Text("\(viewModel.filteredProducts.count) items")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                                    Text("\(viewModel.filteredProducts.count) items")
+                    .font(.caption)
+                    .foregroundColor(Color(.secondaryLabel))
                 }
             }
             
@@ -201,19 +230,19 @@ struct StoreView: View {
         VStack {
             ProgressView()
                 .scaleEffect(1.2)
-            Text("Loading products...")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .padding(.top, 8)
+                            Text("Loading products...")
+                    .font(.subheadline)
+                    .foregroundColor(Color(.secondaryLabel))
+                    .padding(.top, 8)
         }
         .frame(maxWidth: .infinity, minHeight: 200)
     }
     
     private var emptyStateView: some View {
         VStack(spacing: 16) {
-            Image(systemName: "wifi.slash")
+            Image(systemName: "shippingbox")
                 .font(.system(size: 48))
-                .foregroundColor(.secondary)
+                .foregroundColor(Color(.secondaryLabel))
             
             Text("No products available")
                 .font(.headline)
@@ -221,23 +250,37 @@ struct StoreView: View {
             
             Text("This category doesn't have any products yet.")
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundColor(Color(.secondaryLabel))
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity, minHeight: 200)
     }
     
     private var productsGrid: some View {
-        LazyVGrid(columns: [
-            GridItem(.flexible(), spacing: 16),
-            GridItem(.flexible(), spacing: 16)
-        ], spacing: 16) {
+        LazyVGrid(columns: gridColumns, spacing: 16) {
             ForEach(viewModel.filteredProducts) { product in
                 NavigationLink(destination: ProductDetailView(product: product)) {
                     ProductCard(product: product)
                 }
                 .buttonStyle(PlainButtonStyle())
             }
+        }
+    }
+    
+    private var gridColumns: [GridItem] {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            // iPad: 3 columns for better use of space
+            return [
+                GridItem(.flexible(), spacing: 16),
+                GridItem(.flexible(), spacing: 16),
+                GridItem(.flexible(), spacing: 16)
+            ]
+        } else {
+            // iPhone: 2 columns
+            return [
+                GridItem(.flexible(), spacing: 16),
+                GridItem(.flexible(), spacing: 16)
+            ]
         }
     }
 }
@@ -267,42 +310,51 @@ struct CategoryCard: View {
     }
 }
 
+struct BannerButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
+    }
+}
+
 struct ProductCard: View {
     let product: Product
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            // Product Image with Partner Program Badge
-            ZStack(alignment: .topTrailing) {
-                AsyncImage(url: URL(string: "https://raw.githubusercontent.com/rmucenieks/store-poc/main/API/store-pics/\(product.imageUrl)")) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                } placeholder: {
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.2))
-                        .overlay(
-                            ProgressView()
-                                .scaleEffect(0.8)
-                        )
-                }
-                .frame(height: 120)
-                .cornerRadius(8)
-                
-                // Partner Program Badge
-                if product.partnerProgram {
+        VStack(alignment: .leading, spacing: 8) {
+            // Partner Program Badge - positioned above product image
+            if product.partnerProgram {
+                HStack {
                     Image("PartnerProgram")
                         .resizable()
-                        .frame(width: 24, height: 24)
-                        .padding(4)
-                        .background(Color.white)
-                        .clipShape(Circle())
-                        .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 1)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 60, height: 30)
+                    
+                    Spacer()
                 }
             }
             
+            // Product Image
+            AsyncImage(url: URL(string: "https://raw.githubusercontent.com/rmucenieks/store-poc/main/API/store-pics/\(product.imageUrl)")) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                Rectangle()
+                    .fill(Color.gray.opacity(0.2))
+                    .overlay(
+                        ProgressView()
+                            .scaleEffect(0.8)
+                    )
+            }
+            .frame(maxWidth: .infinity, minHeight: 120, maxHeight: 120)
+            .cornerRadius(8)
+            
             // Product Info
             VStack(alignment: .leading, spacing: 4) {
+                
                 Text(product.name)
                     .font(.headline)
                     .fontWeight(.semibold)
@@ -310,7 +362,7 @@ struct ProductCard: View {
                 
                 Text(product.description)
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(Color(.secondaryLabel))
                     .lineLimit(2)
                 
                 HStack {
@@ -325,9 +377,11 @@ struct ProductCard: View {
                     if let frequency = product.frequency {
                         Text("• \(frequency)")
                             .font(.caption)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(Color(.secondaryLabel))
                     }
                 }
+                
+                Spacer(minLength: 0)
                 
                 Text("€\(String(format: "%.2f", product.price))")
                     .font(.headline)
@@ -335,9 +389,10 @@ struct ProductCard: View {
                     .foregroundColor(.blue)
             }
         }
+        .frame(height: 280) // Fixed height for all cards
         .padding(12)
-        .background(Color.white)
+        .background(Color(.systemBackground))
         .cornerRadius(12)
-        .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
+        .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.1), radius: 4, x: 0, y: 2)
     }
 }

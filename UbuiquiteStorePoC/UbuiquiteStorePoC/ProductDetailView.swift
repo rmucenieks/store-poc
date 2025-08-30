@@ -33,6 +33,7 @@ struct ProductDetailView: View {
                 .frame(maxWidth: .infinity)
                 .frame(height: 300)
                 .cornerRadius(12)
+                .background(Color(.systemGray6))
                 
                 VStack(alignment: .leading, spacing: 16) {
                     // Product Title and Price
@@ -55,7 +56,7 @@ struct ProductDetailView: View {
                         
                         Text(viewModel.product.description)
                             .font(.body)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(Color(.secondaryLabel))
                     }
                     
                     // Specifications
@@ -92,7 +93,7 @@ struct ProductDetailView: View {
                                 .scaleEffect(0.8)
                             Text("Loading additional details...")
                                 .font(.subheadline)
-                                .foregroundColor(.secondary)
+                                .foregroundColor(Color(.secondaryLabel))
                         }
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 8)
