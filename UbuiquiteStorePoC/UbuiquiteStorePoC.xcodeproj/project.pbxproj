@@ -1,0 +1,557 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		96C75E3B2E6274F400E6A973 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96C75E202E6274F200E6A973 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96C75E272E6274F200E6A973;
+			remoteInfo = UbuiquiteStorePoC;
+		};
+		96C75E452E6274F400E6A973 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96C75E202E6274F200E6A973 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96C75E272E6274F200E6A973;
+			remoteInfo = UbuiquiteStorePoC;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		96C75E282E6274F200E6A973 /* UbuiquiteStorePoC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UbuiquiteStorePoC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		96C75E3A2E6274F400E6A973 /* UbuiquiteStorePoCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UbuiquiteStorePoCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		96C75E442E6274F400E6A973 /* UbuiquiteStorePoCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UbuiquiteStorePoCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		96C75E2A2E6274F200E6A973 /* UbuiquiteStorePoC */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = UbuiquiteStorePoC;
+			sourceTree = "<group>";
+		};
+		96C75E3D2E6274F400E6A973 /* UbuiquiteStorePoCTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = UbuiquiteStorePoCTests;
+			sourceTree = "<group>";
+		};
+		96C75E472E6274F400E6A973 /* UbuiquiteStorePoCUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = UbuiquiteStorePoCUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		96C75E252E6274F200E6A973 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96C75E372E6274F400E6A973 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96C75E412E6274F400E6A973 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		96C75E1F2E6274F200E6A973 = {
+			isa = PBXGroup;
+			children = (
+				96C75E2A2E6274F200E6A973 /* UbuiquiteStorePoC */,
+				96C75E3D2E6274F400E6A973 /* UbuiquiteStorePoCTests */,
+				96C75E472E6274F400E6A973 /* UbuiquiteStorePoCUITests */,
+				96C75E292E6274F200E6A973 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		96C75E292E6274F200E6A973 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				96C75E282E6274F200E6A973 /* UbuiquiteStorePoC.app */,
+				96C75E3A2E6274F400E6A973 /* UbuiquiteStorePoCTests.xctest */,
+				96C75E442E6274F400E6A973 /* UbuiquiteStorePoCUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		96C75E272E6274F200E6A973 /* UbuiquiteStorePoC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96C75E4E2E6274F400E6A973 /* Build configuration list for PBXNativeTarget "UbuiquiteStorePoC" */;
+			buildPhases = (
+				96C75E242E6274F200E6A973 /* Sources */,
+				96C75E252E6274F200E6A973 /* Frameworks */,
+				96C75E262E6274F200E6A973 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				96C75E2A2E6274F200E6A973 /* UbuiquiteStorePoC */,
+			);
+			name = UbuiquiteStorePoC;
+			packageProductDependencies = (
+			);
+			productName = UbuiquiteStorePoC;
+			productReference = 96C75E282E6274F200E6A973 /* UbuiquiteStorePoC.app */;
+			productType = "com.apple.product-type.application";
+		};
+		96C75E392E6274F400E6A973 /* UbuiquiteStorePoCTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96C75E512E6274F400E6A973 /* Build configuration list for PBXNativeTarget "UbuiquiteStorePoCTests" */;
+			buildPhases = (
+				96C75E362E6274F400E6A973 /* Sources */,
+				96C75E372E6274F400E6A973 /* Frameworks */,
+				96C75E382E6274F400E6A973 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				96C75E3C2E6274F400E6A973 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				96C75E3D2E6274F400E6A973 /* UbuiquiteStorePoCTests */,
+			);
+			name = UbuiquiteStorePoCTests;
+			packageProductDependencies = (
+			);
+			productName = UbuiquiteStorePoCTests;
+			productReference = 96C75E3A2E6274F400E6A973 /* UbuiquiteStorePoCTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		96C75E432E6274F400E6A973 /* UbuiquiteStorePoCUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96C75E542E6274F400E6A973 /* Build configuration list for PBXNativeTarget "UbuiquiteStorePoCUITests" */;
+			buildPhases = (
+				96C75E402E6274F400E6A973 /* Sources */,
+				96C75E412E6274F400E6A973 /* Frameworks */,
+				96C75E422E6274F400E6A973 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				96C75E462E6274F400E6A973 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				96C75E472E6274F400E6A973 /* UbuiquiteStorePoCUITests */,
+			);
+			name = UbuiquiteStorePoCUITests;
+			packageProductDependencies = (
+			);
+			productName = UbuiquiteStorePoCUITests;
+			productReference = 96C75E442E6274F400E6A973 /* UbuiquiteStorePoCUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		96C75E202E6274F200E6A973 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					96C75E272E6274F200E6A973 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					96C75E392E6274F400E6A973 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 96C75E272E6274F200E6A973;
+					};
+					96C75E432E6274F400E6A973 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 96C75E272E6274F200E6A973;
+					};
+				};
+			};
+			buildConfigurationList = 96C75E232E6274F200E6A973 /* Build configuration list for PBXProject "UbuiquiteStorePoC" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 96C75E1F2E6274F200E6A973;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 96C75E292E6274F200E6A973 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				96C75E272E6274F200E6A973 /* UbuiquiteStorePoC */,
+				96C75E392E6274F400E6A973 /* UbuiquiteStorePoCTests */,
+				96C75E432E6274F400E6A973 /* UbuiquiteStorePoCUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		96C75E262E6274F200E6A973 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96C75E382E6274F400E6A973 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96C75E422E6274F400E6A973 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		96C75E242E6274F200E6A973 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96C75E362E6274F400E6A973 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96C75E402E6274F400E6A973 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		96C75E3C2E6274F400E6A973 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 96C75E272E6274F200E6A973 /* UbuiquiteStorePoC */;
+			targetProxy = 96C75E3B2E6274F400E6A973 /* PBXContainerItemProxy */;
+		};
+		96C75E462E6274F400E6A973 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 96C75E272E6274F200E6A973 /* UbuiquiteStorePoC */;
+			targetProxy = 96C75E452E6274F400E6A973 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		96C75E4C2E6274F400E6A973 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		96C75E4D2E6274F400E6A973 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		96C75E4F2E6274F400E6A973 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"UbuiquiteStorePoC/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ubuiquite.store.poc.UbuiquiteStorePoC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		96C75E502E6274F400E6A973 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"UbuiquiteStorePoC/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ubuiquite.store.poc.UbuiquiteStorePoC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		96C75E522E6274F400E6A973 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ubuiquite.store.poc.UbuiquiteStorePoCTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UbuiquiteStorePoC.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UbuiquiteStorePoC";
+			};
+			name = Debug;
+		};
+		96C75E532E6274F400E6A973 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ubuiquite.store.poc.UbuiquiteStorePoCTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UbuiquiteStorePoC.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UbuiquiteStorePoC";
+			};
+			name = Release;
+		};
+		96C75E552E6274F400E6A973 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ubuiquite.store.poc.UbuiquiteStorePoCUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = UbuiquiteStorePoC;
+			};
+			name = Debug;
+		};
+		96C75E562E6274F400E6A973 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ubuiquite.store.poc.UbuiquiteStorePoCUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = UbuiquiteStorePoC;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		96C75E232E6274F200E6A973 /* Build configuration list for PBXProject "UbuiquiteStorePoC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96C75E4C2E6274F400E6A973 /* Debug */,
+				96C75E4D2E6274F400E6A973 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96C75E4E2E6274F400E6A973 /* Build configuration list for PBXNativeTarget "UbuiquiteStorePoC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96C75E4F2E6274F400E6A973 /* Debug */,
+				96C75E502E6274F400E6A973 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96C75E512E6274F400E6A973 /* Build configuration list for PBXNativeTarget "UbuiquiteStorePoCTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96C75E522E6274F400E6A973 /* Debug */,
+				96C75E532E6274F400E6A973 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96C75E542E6274F400E6A973 /* Build configuration list for PBXNativeTarget "UbuiquiteStorePoCUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96C75E552E6274F400E6A973 /* Debug */,
+				96C75E562E6274F400E6A973 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 96C75E202E6274F200E6A973 /* Project object */;
+}
