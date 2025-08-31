@@ -2,13 +2,13 @@
   "categories": [
     {
       "id": "cloud-gateways",
-      "name": "Cloud Gateways",
+      "name": "Облачные шлюзы",
       "icon": "cloud.fill",
       "productsPath": ""
     },
     {
       "id": "switching",
-      "name": "Switching",
+      "name": "Коммутация",
       "icon": "arrow.triangle.branch",
       "productsPath": ""
     },
@@ -20,31 +20,31 @@
     },
     {
       "id": "camera-security",
-      "name": "Camera Security",
+      "name": "Видеонаблюдение",
       "icon": "camera.fill",
       "productsPath": ""
     },
     {
       "id": "door-access",
-      "name": "Door Access",
+      "name": "Доступ к дверям",
       "icon": "lock.open.fill",
       "productsPath": ""
     },
     {
       "id": "integrations",
-      "name": "Integrations",
+      "name": "Интеграции",
       "icon": "puzzlepiece.extension",
       "productsPath": ""
     },
     {
       "id": "advanced-hosting",
-      "name": "Advanced Hosting",
+      "name": "Расширенный хостинг",
       "icon": "server.rack",
       "productsPath": ""
     },
     {
       "id": "accessories",
-      "name": "Accessories",
+      "name": "Аксессуары",
       "icon": "bag.fill",
       "productsPath": ""
     }

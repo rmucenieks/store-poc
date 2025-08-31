@@ -2,13 +2,13 @@
   "categories": [
     {
       "id": "cloud-gateways",
-      "name": "Cloud Gateways",
+      "name": "Mākoņvārti",
       "icon": "cloud.fill",
       "productsPath": ""
     },
     {
       "id": "switching",
-      "name": "Switching",
+      "name": "Komutācija",
       "icon": "arrow.triangle.branch",
       "productsPath": ""
     },
@@ -20,31 +20,31 @@
     },
     {
       "id": "camera-security",
-      "name": "Camera Security",
+      "name": "Videonovērošana",
       "icon": "camera.fill",
       "productsPath": ""
     },
     {
       "id": "door-access",
-      "name": "Door Access",
+      "name": "Durvju piekļuve",
       "icon": "lock.open.fill",
       "productsPath": ""
     },
     {
       "id": "integrations",
-      "name": "Integrations",
+      "name": "Integrācijas",
       "icon": "puzzlepiece.extension",
       "productsPath": ""
     },
     {
       "id": "advanced-hosting",
-      "name": "Advanced Hosting",
+      "name": "Paplašināta mitināšana",
       "icon": "server.rack",
       "productsPath": ""
     },
     {
       "id": "accessories",
-      "name": "Accessories",
+      "name": "Piederumi",
       "icon": "bag.fill",
       "productsPath": ""
     }

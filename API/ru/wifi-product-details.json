@@ -1,17 +1,17 @@
 {
   "product": {
     "main": {
-        "id":"e7",
-        "name":"E7",
-        "price":499.00,
-        "description":"Enterprise-grade indoor/outdoor access point with WiFi 7 performance.",
-        "ethernet":"10GbE",
-        "streams":8,
-        "wifiStandard":"WiFi 7",
-        "wifiIcon":"wifi.circle.fill",
-        "frequency":"5GHz",
-        "imageUrl":"e7.avif",
-        "partnerProgram":true
+      "id": "e7",
+      "name": "E7",
+      "price": 499.00,
+      "description": "Профессиональная точка доступа для помещений и улицы с производительностью WiFi 7.",
+      "ethernet": "10GbE",
+      "streams": 8,
+      "wifiStandard": "WiFi 7",
+      "wifiIcon": "wifi.circle.fill",
+      "frequency": "5GHz",
+      "imageUrl": "e7.avif",
+      "partnerProgram": true
     },
     "overview": {
       "streams": 10,
@@ -21,7 +21,7 @@
       },
       "maxClientCount": "1000+",
       "uplink": "10GbE",
-      "mounting": ["Ceiling", "Wall", "VESA (Pro Mount Included)"],
+      "mounting": ["Потолок", "Стена", "VESA (в комплекте Pro-крепление)"],
       "powerMethod": "PoE++",
       "frequency": "6GHz"
     },
@@ -37,81 +37,81 @@
       "maxPowerConsumption": "43W",
       "voltageRange": "45–57V DC",
       "networkingInterfaces": [
-        "1 × 10GbE RJ45 port",
-        "1 × 1GbE RJ45 port"
+        "1 × порт RJ45 10GbE",
+        "1 × порт RJ45 1GbE"
       ],
       "enclosureMaterial": [
-        "UV-stabilized polycarbonate",
-        "Aluminum alloy"
+        "УФ-стабилизированный поликарбонат",
+        "Алюминиевый сплав"
       ],
       "mountMaterial": [
-        "Stainless steel (UniMount)",
-        "Galvanized steel (SGCC)"
+        "Нержавеющая сталь (UniMount)",
+        "Оцинкованная сталь (SGCC)"
       ],
-      "leds": ["Red", "Green", "Blue"],
+      "leds": ["Красный", "Зелёный", "Синий"],
       "systemBus": "16 GB NAND",
       "channelBandwidth": [
         "HT 20/40",
         "VHT 20/40/80",
         "HE 20/40/80/160",
-        "EHT 20/40/80/160/320 (future upgrade)"
+        "EHT 20/40/80/160/320 (будущее обновление)"
       ],
       "ndaaCompliant": true,
       "certifications": ["CE", "FCC", "IC", "Anatel"],
       "operatingFrequency": {
         "us_ca": [
-          "U-NII-1: 2400–2472 MHz",
-          "U-NII-2A: 5150–5250 MHz",
-          "U-NII-2C: 5250–5350 MHz",
-          "U-NII-2C: 5470–5725 MHz",
-          "U-NII-3: 5725–5850 MHz",
-          "U-NII-4: 5850–5895 MHz",
-          "U-NII-5: 5925–7125 MHz"
+          "U-NII-1: 2400–2472 МГц",
+          "U-NII-2A: 5150–5250 МГц",
+          "U-NII-2C: 5250–5350 МГц",
+          "U-NII-2C: 5470–5725 МГц",
+          "U-NII-3: 5725–5850 МГц",
+          "U-NII-4: 5850–5895 МГц",
+          "U-NII-5: 5925–7125 МГц"
         ],
         "worldwide": [
-          "U-NII-1: 2400–2483.5 MHz",
-          "U-NII-2A: 5150–5250 MHz",
-          "U-NII-5: 5925–7125 MHz"
+          "U-NII-1: 2400–2483.5 МГц",
+          "U-NII-2A: 5150–5250 МГц",
+          "U-NII-5: 5925–7125 МГц"
         ]
       },
       "ambientOperatingTemperature": {
-        "celsius": "-30 to 55°C",
-        "fahrenheit": "-22 to 122°F"
+        "celsius": "-30 до 55°C",
+        "fahrenheit": "-22 до 122°F"
       }
     },
     "software": {
-      "unifiNetwork": "Version 9.2.87 and later",
+      "unifiNetwork": "Версия 9.2.87 и выше",
       "mobileApp": {
-        "ios": "Version 10.24.1 and later",
-        "android": "Version 10.25.2 and later"
+        "ios": "Версия 10.24.1 и выше",
+        "android": "Версия 10.25.2 и выше"
       }
     },
     "features": {
       "wireless": [
-        "Wireless Meshing",
-        "Band Steering",
-        "802.11v BSS Transition Management",
-        "802.11r Fast Roaming",
-        "802.11k Radio Resource Management (RRM)",
-        "Advanced Radio Management",
-        "Real-Time Spectral Analysis",
+        "Беспроводная сетка (Meshing)",
+        "Управление диапазонами",
+        "802.11v управление переходами BSS",
+        "802.11r быстрое роуминг",
+        "802.11k управление радиоресурсами (RRM)",
+        "Расширенное управление радио",
+        "Анализ спектра в реальном времени",
         "Passpoint (Hotspot 2.0)"
       ],
       "captivePortal": [
-        "Custom Branding Landing Page",
-        "Voucher Authentication",
-        "Payment-Based Authentication",
-        "External Portal Server Support",
-        "Password Authentication",
-        "Guest Network Isolation"
+        "Приветственная страница с брендингом",
+        "Аутентификация по ваучеру",
+        "Аутентификация через оплату",
+        "Поддержка внешнего портального сервера",
+        "Аутентификация по паролю",
+        "Изоляция гостевой сети"
       ],
       "security": [
-        "Private Pre-Shared Key (PPSK)",
-        "WiFi Speed Limiting",
-        "Client Device Isolation",
-        "WiFi Schedules",
-        "RADIUS over TLS (RadSec)",
-        "Dynamic RADIUS-assigned VLAN"
+        "Приватный предварительно заданный ключ (PPSK)",
+        "Ограничение скорости WiFi",
+        "Изоляция клиентских устройств",
+        "Расписание WiFi",
+        "RADIUS через TLS (RadSec)",
+        "Динамическое назначение VLAN через RADIUS"
       ]
     }
   }

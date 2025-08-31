@@ -1,17 +1,17 @@
 {
   "product": {
     "main": {
-        "id":"e7",
-        "name":"E7",
-        "price":499.00,
-        "description":"Enterprise-grade indoor/outdoor access point with WiFi 7 performance.",
-        "ethernet":"10GbE",
-        "streams":8,
-        "wifiStandard":"WiFi 7",
-        "wifiIcon":"wifi.circle.fill",
-        "frequency":"5GHz",
-        "imageUrl":"e7.avif",
-        "partnerProgram":true
+      "id": "e7",
+      "name": "E7",
+      "price": 499.00,
+      "description": "Uzņēmuma līmeņa iekštelpu/āra piekļuves punkts ar WiFi 7 veiktspēju.",
+      "ethernet": "10GbE",
+      "streams": 8,
+      "wifiStandard": "WiFi 7",
+      "wifiIcon": "wifi.circle.fill",
+      "frequency": "5GHz",
+      "imageUrl": "e7.avif",
+      "partnerProgram": true
     },
     "overview": {
       "streams": 10,
@@ -21,7 +21,7 @@
       },
       "maxClientCount": "1000+",
       "uplink": "10GbE",
-      "mounting": ["Ceiling", "Wall", "VESA (Pro Mount Included)"],
+      "mounting": ["Griesti", "Siena", "VESA (Pro stiprinājums iekļauts)"],
       "powerMethod": "PoE++",
       "frequency": "6GHz"
     },
@@ -37,24 +37,24 @@
       "maxPowerConsumption": "43W",
       "voltageRange": "45–57V DC",
       "networkingInterfaces": [
-        "1 × 10GbE RJ45 port",
-        "1 × 1GbE RJ45 port"
+        "1 × 10GbE RJ45 ports",
+        "1 × 1GbE RJ45 ports"
       ],
       "enclosureMaterial": [
-        "UV-stabilized polycarbonate",
-        "Aluminum alloy"
+        "UV stabilizēts polikarbonāts",
+        "Alumīnija sakausējums"
       ],
       "mountMaterial": [
-        "Stainless steel (UniMount)",
-        "Galvanized steel (SGCC)"
+        "Nerūsējošais tērauds (UniMount)",
+        "Cinkots tērauds (SGCC)"
       ],
-      "leds": ["Red", "Green", "Blue"],
+      "leds": ["Sarkans", "Zaļš", "Zils"],
       "systemBus": "16 GB NAND",
       "channelBandwidth": [
         "HT 20/40",
         "VHT 20/40/80",
         "HE 20/40/80/160",
-        "EHT 20/40/80/160/320 (future upgrade)"
+        "EHT 20/40/80/160/320 (nākotnes atjauninājums)"
       ],
       "ndaaCompliant": true,
       "certifications": ["CE", "FCC", "IC", "Anatel"],
@@ -75,43 +75,43 @@
         ]
       },
       "ambientOperatingTemperature": {
-        "celsius": "-30 to 55°C",
-        "fahrenheit": "-22 to 122°F"
+        "celsius": "-30 līdz 55°C",
+        "fahrenheit": "-22 līdz 122°F"
       }
     },
     "software": {
-      "unifiNetwork": "Version 9.2.87 and later",
+      "unifiNetwork": "Versija 9.2.87 un jaunāka",
       "mobileApp": {
-        "ios": "Version 10.24.1 and later",
-        "android": "Version 10.25.2 and later"
+        "ios": "Versija 10.24.1 un jaunāka",
+        "android": "Versija 10.25.2 un jaunāka"
       }
     },
     "features": {
       "wireless": [
-        "Wireless Meshing",
-        "Band Steering",
-        "802.11v BSS Transition Management",
-        "802.11r Fast Roaming",
-        "802.11k Radio Resource Management (RRM)",
-        "Advanced Radio Management",
-        "Real-Time Spectral Analysis",
+        "Bezvadu tīkla savienošana (Meshing)",
+        "Joslu vadība",
+        "802.11v BSS pārejas pārvaldība",
+        "802.11r ātrā viesabonēšana",
+        "802.11k radio resursu pārvaldība (RRM)",
+        "Uzlabota radio pārvaldība",
+        "Reāllaika spektra analīze",
         "Passpoint (Hotspot 2.0)"
       ],
       "captivePortal": [
-        "Custom Branding Landing Page",
-        "Voucher Authentication",
-        "Payment-Based Authentication",
-        "External Portal Server Support",
-        "Password Authentication",
-        "Guest Network Isolation"
+        "Pielāgota zīmola sākumlapa",
+        "Vaučeru autentifikācija",
+        "Maksājumu autentifikācija",
+        "Atbalsts ārējam portāla serverim",
+        "Paroles autentifikācija",
+        "Viesu tīkla izolācija"
       ],
       "security": [
-        "Private Pre-Shared Key (PPSK)",
-        "WiFi Speed Limiting",
-        "Client Device Isolation",
-        "WiFi Schedules",
-        "RADIUS over TLS (RadSec)",
-        "Dynamic RADIUS-assigned VLAN"
+        "Privāta iepriekš koplietota parole (PPSK)",
+        "WiFi ātruma ierobežošana",
+        "Klientu ierīču izolācija",
+        "WiFi grafiki",
+        "RADIUS caur TLS (RadSec)",
+        "Dinamiska RADIUS piešķirta VLAN"
       ]
     }
   }
