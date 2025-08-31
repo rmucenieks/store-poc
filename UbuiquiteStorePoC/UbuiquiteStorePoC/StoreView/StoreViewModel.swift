@@ -52,6 +52,17 @@ class StoreViewModel: ObservableObject {
         self.imgRepository = imgRepository
         self.langHandler = langHandler
         self.bannerItem = bannerItem
+        
+        // Listen for language changes to reload data
+        NotificationCenter.default.addObserver(
+            forName: .languageChanged,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task {
+                await self?.loadCategories()
+            }
+        }
     }
     
     func loadCategories() async {

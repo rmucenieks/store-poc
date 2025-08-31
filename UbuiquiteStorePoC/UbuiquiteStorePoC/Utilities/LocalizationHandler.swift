@@ -43,6 +43,7 @@ class LocalizationHandler: ObservableObject, Localizer {
             print("🌍 Language changed to: \(currentLanguage.displayName) (\(currentLanguage.rawValue))")
         }
     }
+
     var allAppLanguages: [Language] { return LocalizationHandler.Language.allCases }
 
     var currentLangKey: String { currentLanguage.rawValue }
@@ -61,7 +62,7 @@ class LocalizationHandler: ObservableObject, Localizer {
         if let path = bundle.path(forResource: language, ofType: "lproj"),
            let languageBundle = Bundle(path: path) {
             let localizedString = languageBundle.localizedString(forKey: key, value: key, table: "Localizable")
-            print("🌐 [\(language)] '\(key)' -> '\(localizedString)'")
+//            print("🌐 [\(language)] '\(key)' -> '\(localizedString)'")
             return localizedString
         }
 
@@ -93,27 +94,6 @@ class LocalizationHandler: ObservableObject, Localizer {
     }
 }
 
-
-
-//class LocalizationManager {
-//    static var shared = LocalizationManager()
-//
-//    let handler: LocalizationHandler = LocalizationHandler
-//
-//
-//
-//    
-//
-//    
-//
-//}
-//
-//// MARK: - Localized String Extension
-//extension String {
-//    var localized: String {
-//        return LocalizationManager.shared.localizedString(for: self)
-//    }
-//}
 
 // MARK: - Notification Names
 extension Notification.Name {

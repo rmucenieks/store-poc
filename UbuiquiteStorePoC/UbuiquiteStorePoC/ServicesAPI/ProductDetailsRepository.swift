@@ -24,6 +24,7 @@ internal struct UProductDetailsRepository: ProductDetailsRepository {
             .appending(path: APIServiceConstants.wifiProductDetailsJSON) else {
             return .success(nil)
         }
+        print("FETCH: URL: \(url)")
 
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
