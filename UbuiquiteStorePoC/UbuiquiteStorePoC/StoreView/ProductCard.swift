@@ -9,6 +9,7 @@ import SwiftUI
 struct ProductCard: View {
     let product: Product
     let imageURL: URL?
+    let localizer: Localizer
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -63,7 +64,7 @@ struct ProductCard: View {
                         .foregroundColor(.blue)
 
                     if let frequency = product.frequency {
-                        Text(String(format: "frequency_separator".localized, frequency))
+                        Text(String(format: localizer.localized("frequency_separator"), frequency))
                             .font(.caption)
                             .foregroundColor(Color(.secondaryLabel))
                     }
@@ -71,7 +72,7 @@ struct ProductCard: View {
 
                 Spacer(minLength: 0)
 
-                Text(String(format: "euro_symbol".localized + "%.2f", product.price))
+                Text(String(format: localizer.localized("euro_symbol") + "%.2f", product.price))
                     .font(.headline)
                     .fontWeight(.bold)
                     .foregroundColor(.blue)
@@ -86,7 +87,13 @@ struct ProductCard: View {
 }
 
 #Preview {
+    let mock = MockLocalizer(overrides: [
+        "frequency_separator": "",
+        "euro_symbol": "eur"
+    ])
+
     ProductCard(product: Product.productDemoItem,
-                imageURL: URL(string: "https://raw.githubusercontent.com/rmucenieks/store-poc/main/API/store-pics/e7.avif"))
+                imageURL: URL(string: "https://raw.githubusercontent.com/rmucenieks/store-poc/main/API/store-pics/e7.avif"),
+                localizer: mock)
 }
 

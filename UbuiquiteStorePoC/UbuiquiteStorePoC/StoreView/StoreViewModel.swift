@@ -12,6 +12,7 @@ import UIKit
 class StoreViewModel: ObservableObject {
     private let repository: StoreRepository
     private let imgRepository: ImageRepository //TODO: use it also in the store picture fetch
+    @Published var langHandler: LocalizationHandler
 
     @Published var categories: [ProductCategory] = []
     @Published var products: [Product] = []
@@ -45,9 +46,11 @@ class StoreViewModel: ObservableObject {
     
     init(repository: StoreRepository,
          imgRepository: ImageRepository,
-         bannerItem: BannerItem) {
+         bannerItem: BannerItem,
+         langHandler: LocalizationHandler) {
         self.repository = repository
         self.imgRepository = imgRepository
+        self.langHandler = langHandler
         self.bannerItem = bannerItem
     }
     
@@ -65,7 +68,7 @@ class StoreViewModel: ObservableObject {
                 await loadProducts(productsPath: firstCategory.productsPath)
             }
         case .failure(let error):
-            errorMessage = "failed_to_load_categories".localized + ": \(error.localizedDescription)"
+            errorMessage = langHandler.localized("failed_to_load_categories") + ": \(error.localizedDescription)"
         }
         
         isLoadingCategories = false
@@ -94,7 +97,7 @@ class StoreViewModel: ObservableObject {
         case .success(let products):
             self.products = products
         case .failure(let error):
-            errorMessage = "failed_to_load_products".localized + ": \(error.localizedDescription)"
+            errorMessage = langHandler.localized("failed_to_load_products") + ": \(error.localizedDescription)"
         }
         
         isLoadingProducts = false

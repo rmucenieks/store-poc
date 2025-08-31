@@ -1,0 +1,119 @@
+{
+  "product": {
+    "main": {
+        "id":"e7",
+        "name":"E7",
+        "price":499.00,
+        "description":"Enterprise-grade indoor/outdoor access point with WiFi 7 performance.",
+        "ethernet":"10GbE",
+        "streams":8,
+        "wifiStandard":"WiFi 7",
+        "wifiIcon":"wifi.circle.fill",
+        "frequency":"5GHz",
+        "imageUrl":"e7.avif",
+        "partnerProgram":true
+    },
+    "overview": {
+      "streams": 10,
+      "coverageArea": {
+        "squareMeters": 185,
+        "squareFeet": 2000
+      },
+      "maxClientCount": "1000+",
+      "uplink": "10GbE",
+      "mounting": ["Ceiling", "Wall", "VESA (Pro Mount Included)"],
+      "powerMethod": "PoE++",
+      "frequency": "6GHz"
+    },
+    "hardware": {
+      "dimensions": {
+        "millimeters": "250 x 250 x 43.5",
+        "inches": "9.8 x 9.8 x 1.7"
+      },
+      "weight": {
+        "kilograms": 1.8,
+        "pounds": 4
+      },
+      "maxPowerConsumption": "43W",
+      "voltageRange": "45–57V DC",
+      "networkingInterfaces": [
+        "1 × 10GbE RJ45 port",
+        "1 × 1GbE RJ45 port"
+      ],
+      "enclosureMaterial": [
+        "UV-stabilized polycarbonate",
+        "Aluminum alloy"
+      ],
+      "mountMaterial": [
+        "Stainless steel (UniMount)",
+        "Galvanized steel (SGCC)"
+      ],
+      "leds": ["Red", "Green", "Blue"],
+      "systemBus": "16 GB NAND",
+      "channelBandwidth": [
+        "HT 20/40",
+        "VHT 20/40/80",
+        "HE 20/40/80/160",
+        "EHT 20/40/80/160/320 (future upgrade)"
+      ],
+      "ndaaCompliant": true,
+      "certifications": ["CE", "FCC", "IC", "Anatel"],
+      "operatingFrequency": {
+        "us_ca": [
+          "U-NII-1: 2400–2472 MHz",
+          "U-NII-2A: 5150–5250 MHz",
+          "U-NII-2C: 5250–5350 MHz",
+          "U-NII-2C: 5470–5725 MHz",
+          "U-NII-3: 5725–5850 MHz",
+          "U-NII-4: 5850–5895 MHz",
+          "U-NII-5: 5925–7125 MHz"
+        ],
+        "worldwide": [
+          "U-NII-1: 2400–2483.5 MHz",
+          "U-NII-2A: 5150–5250 MHz",
+          "U-NII-5: 5925–7125 MHz"
+        ]
+      },
+      "ambientOperatingTemperature": {
+        "celsius": "-30 to 55°C",
+        "fahrenheit": "-22 to 122°F"
+      }
+    },
+    "software": {
+      "unifiNetwork": "Version 9.2.87 and later",
+      "mobileApp": {
+        "ios": "Version 10.24.1 and later",
+        "android": "Version 10.25.2 and later"
+      }
+    },
+    "features": {
+      "wireless": [
+        "Wireless Meshing",
+        "Band Steering",
+        "802.11v BSS Transition Management",
+        "802.11r Fast Roaming",
+        "802.11k Radio Resource Management (RRM)",
+        "Advanced Radio Management",
+        "Real-Time Spectral Analysis",
+        "Passpoint (Hotspot 2.0)"
+      ],
+      "captivePortal": [
+        "Custom Branding Landing Page",
+        "Voucher Authentication",
+        "Payment-Based Authentication",
+        "External Portal Server Support",
+        "Password Authentication",
+        "Guest Network Isolation"
+      ],
+      "security": [
+        "Private Pre-Shared Key (PPSK)",
+        "WiFi Speed Limiting",
+        "Client Device Isolation",
+        "WiFi Schedules",
+        "RADIUS over TLS (RadSec)",
+        "Dynamic RADIUS-assigned VLAN"
+      ]
+    }
+  }
+}
+

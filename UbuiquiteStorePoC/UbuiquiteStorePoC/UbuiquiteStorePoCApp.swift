@@ -11,11 +11,12 @@ import SwiftUI
 struct UbuiquiteStorePoCApp: App {
     var body: some Scene {
         WindowGroup {
-            StoreView(vm: StoreViewModel(repository: UStoreRepository(),
+            let localizer = LocalizationHandler()
+            let bannerItem = BannerItem.bannerDemoItem(localizer: localizer)
+            StoreView(vm: StoreViewModel(repository: UStoreRepository(localizer: localizer),
                                          imgRepository: UImageRepository(),
-                                         bannerItem: BannerItem.bannerDemoItem))
+                                         bannerItem: bannerItem, langHandler: localizer))
                 .preferredColorScheme(.none) // Allow system to choose light/dark mode
-                .environmentObject(LocalizationManager.shared)
         }
     }
 }

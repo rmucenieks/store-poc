@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct StoreView: View {
-    @ObservedObject private var viewModel: StoreViewModel
-    @StateObject private var localizationManager = LocalizationManager.shared
+    @ObservedObject private var vm: StoreViewModel
     @State private var showingLanguageSwitcher = false
-    @State private var showingLocalizationTest = false
+//    @State private var showingLocalizationTest = false
 
     public init(vm: StoreViewModel) {
-        self.viewModel = vm
+        self.vm = vm
     }
     
     var body: some View {
@@ -28,32 +27,32 @@ struct StoreView: View {
                     ScrollView {
                         VStack(spacing: 20) {
                             // Banner
-                            BannerView(bannerItem: viewModel.bannerItem,
-                                       storeURL: viewModel.storeURL)
+                            BannerView(bannerItem: vm.bannerItem,
+                                       storeURL: vm.storeURL)
 
                         // Categories
-                        if viewModel.isLoadingCategories {
+                        if vm.isLoadingCategories {
                             VStack {
                                 ProgressView()
                                     .scaleEffect(1.2)
-                                Text("loading_categories".localized)
+                                Text(vm.langHandler.localized("loading_categories"))
                                     .font(.subheadline)
                                     .foregroundColor(Color(.secondaryLabel))
                                     .padding(.top, 8)
                             }
                             .frame(maxWidth: .infinity, minHeight: 100)
-                        } else if !viewModel.categories.isEmpty {
+                        } else if !vm.categories.isEmpty {
                             categoriesView
                         }
                         
                         // Error Message
-                        if let errorMessage = viewModel.errorMessage {
+                        if let errorMessage = vm.errorMessage {
                             VStack(spacing: 12) {
                                 Image(systemName: "exclamationmark.triangle")
                                     .font(.system(size: 32))
                                     .foregroundColor(.orange)
                                 
-                                Text("error".localized)
+                                Text(vm.langHandler.localized("error"))
                                     .font(.headline)
                                     .fontWeight(.medium)
                                 
@@ -62,9 +61,9 @@ struct StoreView: View {
                                     .foregroundColor(.secondary)
                                     .multilineTextAlignment(.center)
                                 
-                                Button("retry".localized) {
+                                Button(vm.langHandler.localized("retry")) {
                                     Task {
-                                        await viewModel.loadCategories()
+                                        await vm.loadCategories()
                                     }
                                 }
                                 .buttonStyle(.borderedProminent)
@@ -77,7 +76,7 @@ struct StoreView: View {
                         // Products
                         productsView
                     }
-                        .padding(.horizontal, viewModel.horizontalPadding)
+                        .padding(.horizontal, vm.horizontalPadding)
                 }
                 
                 // Gradient overlay - positioned above scroll content
@@ -94,14 +93,14 @@ struct StoreView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle()) // Force full screen on iPad
         .task {
-            await viewModel.loadCategories()
+            await vm.loadCategories()
         }
         .sheet(isPresented: $showingLanguageSwitcher) {
-            LanguageSwitcherView()
+            LanguageSwitcherView(localization: vm.langHandler)
         }
-        .sheet(isPresented: $showingLocalizationTest) {
-            LocalizationTestView()
-        }
+//        .sheet(isPresented: $showingLocalizationTest) {
+//            LocalizationTestView()
+//        }
     }
     
     private var headerView: some View {
@@ -117,9 +116,9 @@ struct StoreView: View {
                     showingLanguageSwitcher = true
                 }) {
                     HStack(spacing: 4) {
-                        Text(localizationManager.currentLanguage.flag)
+                        Text(vm.langHandler.currentLanguage.flag)
                             .font(.title3)
-                        Text(localizationManager.currentLanguage.rawValue.uppercased())
+                        Text(vm.langHandler.currentLanguage.rawValue.uppercased())
                             .font(.caption)
                             .fontWeight(.medium)
                     }
@@ -131,24 +130,24 @@ struct StoreView: View {
                 
                 // Debug button - long press to show language info
                 Button(action: {
-                    print(localizationManager.getCurrentLanguageInfo())
+                    print(vm.langHandler.getCurrentLanguageInfo())
                 }) {
                     Image(systemName: "info.circle")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
                 .onLongPressGesture {
-                    print(localizationManager.getCurrentLanguageInfo())
+                    print(vm.langHandler.getCurrentLanguageInfo())
                 }
                 
-                // Localization Test Button
-                Button(action: {
-                    showingLocalizationTest = true
-                }) {
-                    Image(systemName: "textformat.abc")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
+//                // Localization Test Button
+//                Button(action: {
+//                    showingLocalizationTest = true
+//                }) {
+//                    Image(systemName: "textformat.abc")
+//                        .font(.caption)
+//                        .foregroundColor(.secondary)
+//                }
             }
             
             // Search Bar
@@ -156,12 +155,12 @@ struct StoreView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.secondary)
                 
-                TextField("search_products_placeholder".localized, text: $viewModel.searchText)
+                TextField(vm.langHandler.localized("search_products_placeholder"), text: $vm.searchText)
                     .textFieldStyle(PlainTextFieldStyle())
                 
-                if !viewModel.searchText.isEmpty {
+                if !vm.searchText.isEmpty {
                     Button(action: {
-                        viewModel.searchText = ""
+                        vm.searchText = ""
                     }) {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.secondary)
@@ -173,26 +172,26 @@ struct StoreView: View {
             .background(Color(.systemGray6))
             .cornerRadius(8)
         }
-        .padding(.horizontal, viewModel.horizontalPadding)
+        .padding(.horizontal, vm.horizontalPadding)
         .padding(.top, 8)
         .padding(.bottom, 16)
     }
 
     private var categoriesView: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("categories".localized)
+            Text(vm.langHandler.localized("categories"))
                 .font(.headline)
                 .fontWeight(.semibold)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 12) {
-                    ForEach(viewModel.categories) { category in
+                    ForEach(vm.categories) { category in
                         CategoryCard(
                             category: category,
-                            isSelected: viewModel.selectedCategory?.id == category.id
+                            isSelected: vm.selectedCategory?.id == category.id
                         ) {
                             Task {
-                                await viewModel.selectCategory(category)
+                                await vm.selectCategory(category)
                             }
                         }
                     }
@@ -205,22 +204,22 @@ struct StoreView: View {
     private var productsView: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("products".localized)
+                Text(vm.langHandler.localized("products"))
                     .font(.headline)
                     .fontWeight(.semibold)
                 
                 Spacer()
                 
-                if !viewModel.products.isEmpty {
-                    Text(String(format: "items_count".localized, viewModel.filteredProducts.count))
+                if !vm.products.isEmpty {
+                    Text(String(format: vm.langHandler.localized("items_count"), vm.filteredProducts.count))
                         .font(.caption)
                         .foregroundColor(Color(.secondaryLabel))
                 }
             }
             
-            if viewModel.isLoadingProducts {
+            if vm.isLoadingProducts {
                 loadingView
-            } else if viewModel.filteredProducts.isEmpty {
+            } else if vm.filteredProducts.isEmpty {
                 emptyStateView
             } else {
                 productsGrid
@@ -232,7 +231,7 @@ struct StoreView: View {
         VStack {
             ProgressView()
                 .scaleEffect(1.2)
-            Text("loading_products".localized)
+            Text(vm.langHandler.localized("loading_products"))
                 .font(.subheadline)
                 .foregroundColor(Color(.secondaryLabel))
                 .padding(.top, 8)
@@ -246,11 +245,11 @@ struct StoreView: View {
                 .font(.system(size: 48))
                 .foregroundColor(Color(.secondaryLabel))
             
-            Text("no_products_available".localized)
+            Text(vm.langHandler.localized(vm.langHandler.localized("no_products_available")))
                 .font(.headline)
                 .fontWeight(.medium)
             
-            Text("no_products_in_category".localized)
+            Text(vm.langHandler.localized("no_products_in_category"))
                 .font(.subheadline)
                 .foregroundColor(Color(.secondaryLabel))
                 .multilineTextAlignment(.center)
@@ -260,15 +259,17 @@ struct StoreView: View {
     
     private var productsGrid: some View {
         LazyVGrid(columns: gridColumns, spacing: 16) {
-            ForEach(viewModel.filteredProducts) { product in
-                //TODO: Check this! If this not initialized already Product Detaisl VM!!!
-                NavigationLink(destination: ProductDetailView(vm: ProductDetailViewModel(product: product,
-                                                                                         repository: UProductDetailsRepository(),
-                                                                                         imgRepository: UImageRepository()))) {
-                    ProductCard(product: product,
-                                imageURL: viewModel.imageURL(imageName: product.imageUrl))
-                }
-                .buttonStyle(PlainButtonStyle())
+            ForEach(vm.filteredProducts) { product in
+////                //TODO: Check this! If this not initialized already Product Detaisl VM!!!
+//                NavigationLink(destination: ProductDetailView(vm: ProductDetailViewModel(product: product,
+//                                                                                         repository: UProductDetailsRepository(localizer: vm.langHandler),
+//                                                                                         imgRepository: UImageRepository(),
+//                                                                                         localizer: vm.langHandler)) {
+//                    ProductCard(product: product,
+//                                imageURL: vm.imageURL(imageName: product.imageUrl),
+//                                localizer: vm.langHandler)
+//                }
+//                .buttonStyle(PlainButtonStyle())
             }
         }
     }
@@ -292,9 +293,26 @@ struct StoreView: View {
 }
 
 #Preview {
-    StoreView(vm: StoreViewModel(repository: UStoreRepository(),
+    let localizer =  MockLocalizer(overrides: [
+        "loading_categories": "",
+        "products": "Products",
+        "items_count": "Filtered count: 1",
+        "retry": "Retry",
+        "error": "Error",
+        "loading_products": "Loading products..",
+        "categories": "Categories",
+        "no_products_available": "No products available",
+        "search_products_placeholder": "Search products",
+        "no_products_in_category": "No products in the category"
+    ])
+
+    let handler = LocalizationHandler(language: .english)
+    let bannerItem = BannerItem.bannerDemoItem(localizer: localizer)
+
+    StoreView(vm: StoreViewModel(repository: UStoreRepository(localizer: localizer),
                                  imgRepository: UImageRepository(),
-                                 bannerItem: BannerItem.bannerDemoItem))
+                                 bannerItem: bannerItem,
+                                 langHandler: handler))
 }
 
 

@@ -13,6 +13,7 @@ class ProductDetailViewModel: ObservableObject {
     private let imgRepository: ImageRepository
 
     let product: Product
+    let localizer: Localizer
     @Published var productDetails: ProductDetails?
     @Published var isLoadingDetails = false
     @Published var quantity = 1
@@ -23,9 +24,11 @@ class ProductDetailViewModel: ObservableObject {
     
     init(product: Product,
          repository: ProductDetailsRepository,
-         imgRepository: ImageRepository) {
+         imgRepository: ImageRepository,
+         localizer: Localizer) {
         self.product = product
         self.repository = repository
+        self.localizer = localizer
         self.imgRepository = imgRepository
     }
     

@@ -12,11 +12,11 @@ struct BannerItem: Identifiable {
     let introText: String
     let initials: String
 
-    static var bannerDemoItem: BannerItem {
+    static func bannerDemoItem(localizer: Localizer) -> BannerItem {
         return BannerItem(id: "u7",
                           name: "UniFi U7 Pro",
-                          subtitle: "wifi_7_high_performance".localized,
-                          introText: "introducing".localized,
+                          subtitle: localizer.localized("wifi_7_high_performance"),
+                          introText: localizer.localized("introducing"),
                           initials: "U7")
     }
 }

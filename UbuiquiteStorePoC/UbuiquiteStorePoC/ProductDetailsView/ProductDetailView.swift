@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ProductDetailView: View {
-    @ObservedObject private var viewModel: ProductDetailViewModel
-    
+    @ObservedObject private var vm: ProductDetailViewModel
+
     init(vm: ProductDetailViewModel) {
-        self.viewModel = vm
+        self.vm = vm
     }
     
     var body: some View {
@@ -19,7 +19,7 @@ struct ProductDetailView: View {
             VStack(alignment: .leading, spacing: 20) {
                 // Product Image with Partner Program Badge
                 ZStack(alignment: .topLeading) {
-                    AsyncImage(url: viewModel.imageURL) { image in
+                    AsyncImage(url: vm.imageURL) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -37,7 +37,7 @@ struct ProductDetailView: View {
                     .background(Color(.systemGray6))
                     
                     // Partner Program Badge
-                    if viewModel.product.partnerProgram {
+                    if vm.product.partnerProgram {
                         VStack(spacing: 0) {
                             Text("UniFi")
                                 .font(.caption2)
@@ -48,13 +48,12 @@ struct ProductDetailView: View {
                                 .fill(Color.white)
                                 .frame(height: 1)
                                 .padding(.horizontal, 4)
-                            
-                            Text("partner".localized)
+                            Text(vm.localizer.localized("partner"))
                                 .font(.caption2)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                             
-                            Text("program".localized)
+                            Text(vm.localizer.localized("program"))
                                 .font(.caption2)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -71,11 +70,11 @@ struct ProductDetailView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     // Product Title and Price
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(viewModel.product.name)
+                        Text(vm.product.name)
                             .font(.title)
                             .fontWeight(.bold)
                         
-                        Text(String(format: "euro_symbol".localized + "%.2f", viewModel.product.price))
+                        Text(String(format: vm.localizer.localized("euro_symbol") + "%.2f", vm.product.price))
                             .font(.title2)
                             .fontWeight(.semibold)
                             .foregroundColor(.blue)
@@ -83,18 +82,18 @@ struct ProductDetailView: View {
                     
                     // Product Description
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("description".localized)
+                        Text(vm.localizer.localized("description"))
                             .font(.headline)
                             .fontWeight(.semibold)
                         
-                        Text(viewModel.product.description)
+                        Text(vm.product.description)
                             .font(.body)
                             .foregroundColor(Color(.secondaryLabel))
                     }
                     
                     // Specifications
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("specifications".localized)
+                        Text(vm.localizer.localized("specifications"))
                             .font(.headline)
                             .fontWeight(.semibold)
                         
@@ -102,15 +101,15 @@ struct ProductDetailView: View {
                             HStack {
                                 Image(systemName: "wifi")
                                     .foregroundColor(.blue)
-                                Text(String(format: "wifi_standard".localized, viewModel.product.wifiStandard))
+                                Text(String(format: vm.localizer.localized("wifi_standard"), vm.product.wifiStandard))
                                     .font(.subheadline)
                             }
                             
-                            if let frequency = viewModel.product.frequency {
+                            if let frequency = vm.product.frequency {
                                 HStack {
                                     Image(systemName: "waveform")
                                         .foregroundColor(.blue)
-                                    Text(String(format: "frequency".localized, frequency))
+                                    Text(String(format: vm.localizer.localized("frequency"), frequency))
                                         .font(.subheadline)
                                 }
                             }
@@ -121,32 +120,32 @@ struct ProductDetailView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         Divider()
                         
-                        Text("purchase_options".localized)
+                        Text(vm.localizer.localized("purchase_options"))
                             .font(.headline)
                             .fontWeight(.semibold)
                         
                         // Quantity Stepper
                         HStack {
-                            Text("quantity".localized)
+                            Text(vm.localizer.localized("quantity"))
                                 .font(.subheadline)
                                 .fontWeight(.medium)
                             
                             Spacer()
                             
                             HStack(spacing: 0) {
-                                Button(action: viewModel.decrementQuantity) {
+                                Button(action: vm.decrementQuantity) {
                                     Image(systemName: "minus.circle.fill")
                                         .font(.title2)
                                         .foregroundColor(.blue)
                                 }
                                 
-                                Text("\(viewModel.quantity)")
+                                Text("\(vm.quantity)")
                                     .font(.title3)
                                     .fontWeight(.semibold)
                                     .frame(minWidth: 40)
                                     .padding(.horizontal, 8)
                                 
-                                Button(action: viewModel.incrementQuantity) {
+                                Button(action: vm.incrementQuantity) {
                                     Image(systemName: "plus.circle.fill")
                                         .font(.title2)
                                         .foregroundColor(.blue)
@@ -155,10 +154,10 @@ struct ProductDetailView: View {
                         }
                         
                         // Add to Cart Button
-                        Button(action: viewModel.addToCart) {
+                        Button(action: vm.addToCart) {
                             HStack {
                                 Image(systemName: "cart.badge.plus")
-                                Text("add_to_cart".localized)
+                                Text(vm.localizer.localized("add_to_cart"))
                             }
                             .font(.headline)
                             .fontWeight(.semibold)
@@ -171,10 +170,10 @@ struct ProductDetailView: View {
                     }
                     
                     // Additional Details Sections
-                    if let details = viewModel.productDetails {
+                    if let details = vm.productDetails {
                         // Overview Section
                         VStack(alignment: .leading, spacing: 8) {
-                                                    Text("overview".localized)
+                                                    Text(vm.localizer.localized("overview"))
                             .font(.headline)
                             .fontWeight(.semibold)
                             
@@ -185,7 +184,7 @@ struct ProductDetailView: View {
                         
                         // Features Section
                         VStack(alignment: .leading, spacing: 8) {
-                                                    Text("features".localized)
+                                                    Text(vm.localizer.localized("features"))
                             .font(.headline)
                             .fontWeight(.semibold)
                             
@@ -205,7 +204,7 @@ struct ProductDetailView: View {
                         
                         // Hardware Section
                         VStack(alignment: .leading, spacing: 8) {
-                                                    Text("hardware".localized)
+                                                    Text(vm.localizer.localized("hardware"))
                             .font(.headline)
                             .fontWeight(.semibold)
                             
@@ -227,7 +226,7 @@ struct ProductDetailView: View {
                         
                         // Software Section
                         VStack(alignment: .leading, spacing: 8) {
-                                                    Text("software".localized)
+                                                    Text(vm.localizer.localized("software"))
                             .font(.headline)
                             .fontWeight(.semibold)
                             
@@ -246,7 +245,7 @@ struct ProductDetailView: View {
                                 }
                             }
                         }
-                    } else if viewModel.isLoadingDetails {
+                    } else if vm.isLoadingDetails {
                         // Loading indicator for additional details
                         VStack(spacing: 12) {
                             Divider()
@@ -254,7 +253,7 @@ struct ProductDetailView: View {
                             HStack {
                                 ProgressView()
                                     .scaleEffect(0.8)
-                                Text("loading_additional_details".localized)
+                                Text(vm.localizer.localized("loading_additional_details"))
                                     .font(.subheadline)
                                     .foregroundColor(Color(.secondaryLabel))
                             }
@@ -266,10 +265,10 @@ struct ProductDetailView: View {
                 .padding(.horizontal, 16)
             }
         }
-        .navigationTitle("product_details".localized)
+        .navigationTitle(vm.localizer.localized("product_details"))
         .navigationBarTitleDisplayMode(.inline)
         .task {
-            await viewModel.loadProductDetails()
+            await vm.loadProductDetails()
         }
     }
 }

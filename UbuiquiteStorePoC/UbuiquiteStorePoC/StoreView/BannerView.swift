@@ -64,5 +64,8 @@ struct BannerButtonStyle: ButtonStyle {
 }
 
 #Preview {
-    BannerView(bannerItem: BannerItem.bannerDemoItem, storeURL: nil)
+    let localizer =  MockLocalizer(overrides: [:])
+
+    let bannerItem = BannerItem.bannerDemoItem(localizer: localizer)
+    BannerView(bannerItem: bannerItem, storeURL: nil)
 }

@@ -13,9 +13,15 @@ internal protocol StoreRepository {
 }
 
 internal struct UStoreRepository: StoreRepository {
+    let localizer: Localizer
+
+    init(localizer: Localizer) {
+        self.localizer = localizer
+    }
 
     func fetchCategories() async -> Result<[ProductCategory], Error> {
         guard let url = URL(string: APIServiceConstants.baseURL)?
+            .appending(path: localizer.currentLangKey)
             .appending(path: APIServiceConstants.categoriesJSON) else {
             return .success([])
         }
@@ -31,7 +37,9 @@ internal struct UStoreRepository: StoreRepository {
 
     func fetchProducts(productsPath: String?) async -> Result<[Product], Error> {
         guard let productsFileName = productsPath, !productsFileName.isEmpty,
-                let url = URL(string: APIServiceConstants.baseURL)?.appending(path: productsFileName)
+                let url = URL(string: APIServiceConstants.baseURL)?
+            .appending(path: localizer.currentLangKey)
+            .appending(path: productsFileName)
         else {
             return .success([])
         }

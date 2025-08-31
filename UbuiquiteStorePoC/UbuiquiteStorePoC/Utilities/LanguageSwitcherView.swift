@@ -1,15 +1,21 @@
 import SwiftUI
 
 struct LanguageSwitcherView: View {
-    @ObservedObject private var localizationManager = LocalizationManager.shared
+    @ObservedObject private var localization: LocalizationHandler
+
     @Environment(\.dismiss) private var dismiss
-    
+
+
+    init(localization: LocalizationHandler) {
+        self.localization = localization
+    }
+
     var body: some View {
         NavigationView {
             List {
-                ForEach(LocalizationManager.Language.allCases, id: \.self) { language in
+                ForEach(localization.allAppLanguages, id: \.self) { language in
                     Button(action: {
-                        localizationManager.currentLanguage = language
+                        localization.currentLanguage = language
                         dismiss()
                     }) {
                         HStack {
@@ -21,7 +27,7 @@ struct LanguageSwitcherView: View {
                             
                             Spacer()
                             
-                            if localizationManager.currentLanguage == language {
+                            if localization.currentLanguage == language {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.blue)
                                     .fontWeight(.bold)
@@ -31,18 +37,18 @@ struct LanguageSwitcherView: View {
                     .buttonStyle(PlainButtonStyle())
                 }
             }
-            .navigationTitle("Language".localized)
+            .navigationTitle(localization.localized("Language"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Reset".localized) {
-                        localizationManager.resetToDefaultLanguage()
+                    Button(localization.localized("Reset")) {
+                        localization.resetToDefaultLanguage()
                     }
                     .foregroundColor(.red)
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done".localized) {
+                    Button(localization.localized("Done")) {
                         dismiss()
                     }
                 }
@@ -52,5 +58,11 @@ struct LanguageSwitcherView: View {
 }
 
 #Preview {
-    LanguageSwitcherView()
+//    let localizer =  MockLocalizer(overrides: [
+//        "Language": "Language",
+//        "Reset": "Reset",
+//        "Done": "Done",
+//    ])
+    let handler = LocalizationHandler(language: .english)
+    LanguageSwitcherView(localization: handler)
 }
