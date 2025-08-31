@@ -9,6 +9,12 @@ class LocalizationManager: ObservableObject {
             UserDefaults.standard.set(currentLanguage.rawValue, forKey: "selectedLanguage")
             UserDefaults.standard.set([currentLanguage.rawValue], forKey: "AppleLanguages")
             UserDefaults.standard.synchronize()
+            
+            // Force UI update by posting notification
+            NotificationCenter.default.post(name: .languageChanged, object: nil)
+            
+            // Debug print to verify language change
+            print("🌍 Language changed to: \(currentLanguage.displayName) (\(currentLanguage.rawValue))")
         }
     }
     
@@ -45,10 +51,32 @@ class LocalizationManager: ObservableObject {
         
         if let path = bundle.path(forResource: language, ofType: "lproj"),
            let languageBundle = Bundle(path: path) {
-            return languageBundle.localizedString(forKey: key, value: key, table: "Localizable")
+            let localizedString = languageBundle.localizedString(forKey: key, value: key, table: "Localizable")
+            print("🌐 [\(language)] '\(key)' -> '\(localizedString)'")
+            return localizedString
         }
         
+        print("⚠️ [\(language)] Bundle not found for language, using fallback for key: '\(key)'")
         return bundle.localizedString(forKey: key, value: key, table: "Localizable")
+    }
+    
+    func resetToDefaultLanguage() {
+        currentLanguage = .english
+        UserDefaults.standard.removeObject(forKey: "selectedLanguage")
+        UserDefaults.standard.synchronize()
+        print("🔄 Reset to default language: English")
+    }
+    
+    func getCurrentLanguageInfo() -> String {
+        let savedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage") ?? "none"
+        let appleLanguages = UserDefaults.standard.array(forKey: "AppleLanguages") as? [String] ?? []
+        return """
+        🌍 Current Language Info:
+        - Selected: \(currentLanguage.displayName) (\(currentLanguage.rawValue))
+        - Saved in UserDefaults: \(savedLanguage)
+        - AppleLanguages: \(appleLanguages)
+        - Bundle languages: \(Bundle.main.localizations)
+        """
     }
 }
 
@@ -57,4 +85,9 @@ extension String {
     var localized: String {
         return LocalizationManager.shared.localizedString(for: self)
     }
+}
+
+// MARK: - Notification Names
+extension Notification.Name {
+    static let languageChanged = Notification.Name("languageChanged")
 }

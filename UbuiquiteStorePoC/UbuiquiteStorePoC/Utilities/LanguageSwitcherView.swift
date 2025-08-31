@@ -34,6 +34,13 @@ struct LanguageSwitcherView: View {
             .navigationTitle("Language".localized)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Reset".localized) {
+                        localizationManager.resetToDefaultLanguage()
+                    }
+                    .foregroundColor(.red)
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done".localized) {
                         dismiss()

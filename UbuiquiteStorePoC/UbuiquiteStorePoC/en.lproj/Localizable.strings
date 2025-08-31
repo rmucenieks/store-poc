@@ -59,6 +59,7 @@
 /* Language Switcher */
 "language" = "Language";
 "done" = "Done";
+"reset" = "Reset";
 
 /* Navigation */
 "product_details" = "Product Details";

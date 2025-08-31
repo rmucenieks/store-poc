@@ -59,6 +59,7 @@
 /* Language Switcher */
 "language" = "Язык";
 "done" = "Готово";
+"reset" = "Сброс";
 
 /* Navigation */
 "product_details" = "Детали продукта";

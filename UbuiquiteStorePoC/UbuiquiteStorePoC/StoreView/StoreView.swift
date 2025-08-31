@@ -11,6 +11,7 @@ struct StoreView: View {
     @ObservedObject private var viewModel: StoreViewModel
     @StateObject private var localizationManager = LocalizationManager.shared
     @State private var showingLanguageSwitcher = false
+    @State private var showingLocalizationTest = false
 
     public init(vm: StoreViewModel) {
         self.viewModel = vm
@@ -98,6 +99,9 @@ struct StoreView: View {
         .sheet(isPresented: $showingLanguageSwitcher) {
             LanguageSwitcherView()
         }
+        .sheet(isPresented: $showingLocalizationTest) {
+            LocalizationTestView()
+        }
     }
     
     private var headerView: some View {
@@ -123,6 +127,27 @@ struct StoreView: View {
                     .padding(.vertical, 4)
                     .background(Color.blue.opacity(0.1))
                     .cornerRadius(8)
+                }
+                
+                // Debug button - long press to show language info
+                Button(action: {
+                    print(localizationManager.getCurrentLanguageInfo())
+                }) {
+                    Image(systemName: "info.circle")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                .onLongPressGesture {
+                    print(localizationManager.getCurrentLanguageInfo())
+                }
+                
+                // Localization Test Button
+                Button(action: {
+                    showingLocalizationTest = true
+                }) {
+                    Image(systemName: "textformat.abc")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
                 }
             }
             

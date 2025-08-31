@@ -59,6 +59,7 @@
 /* Language Switcher */
 "language" = "Valoda";
 "done" = "Gatavs";
+"reset" = "Atiestatīt";
 
 /* Navigation */
 "product_details" = "Produkta detaļas";
