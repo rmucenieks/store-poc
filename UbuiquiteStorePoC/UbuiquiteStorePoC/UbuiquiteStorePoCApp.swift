@@ -11,7 +11,8 @@ import SwiftUI
 struct UbuiquiteStorePoCApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StoreView(vm: StoreViewModel(repository: UStoreRepository(),
+                                         imgRepository: UImageRepository()))
                 .preferredColorScheme(.none) // Allow system to choose light/dark mode
         }
     }

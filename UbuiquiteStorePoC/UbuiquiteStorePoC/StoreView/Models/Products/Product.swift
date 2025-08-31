@@ -1,28 +1,11 @@
 //
-//  Models.swift
+//  Product.swift
 //  UbuiquiteStorePoC
 //
-//  Created by Rolands Mucenieks on 30/08/2025.
+//  Created by Rolands Mucenieks on 31/08/2025.
 //
 
 import Foundation
-
-struct CategoryList: Decodable {
-    let categories: [ProductCategory]
-}
-
-struct ProductList: Decodable {
-    let products: [Product]
-}
-
-
-
-struct ProductCategory: Identifiable, Decodable {
-    let id: String
-    let name: String
-    let icon: String
-    let products: String?
-}
 
 struct Product: Identifiable, Decodable {
     let id: String
@@ -33,7 +16,7 @@ struct Product: Identifiable, Decodable {
     let frequency: String?
     let imageUrl: String
     let partnerProgram: Bool
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case name

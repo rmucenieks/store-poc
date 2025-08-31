@@ -4,49 +4,49 @@
       "id": "cloud-gateways",
       "name": "Cloud Gateways",
       "icon": "cloud.fill",
-      "products": ""
+      "productsPath": ""
     },
     {
       "id": "switching",
       "name": "Switching",
       "icon": "arrow.triangle.branch",
-      "products": ""
+      "productsPath": ""
     },
     {
       "id": "wifi",
       "name": "WiFi",
       "icon": "wifi",
-      "products": "wifi-products.json"
+      "productsPath": "wifi-products.json"
     },
     {
       "id": "camera-security",
       "name": "Camera Security",
       "icon": "camera.fill",
-      "products": ""
+      "productsPath": ""
     },
     {
       "id": "door-access",
       "name": "Door Access",
       "icon": "lock.open.fill",
-      "products": ""
+      "productsPath": ""
     },
     {
       "id": "integrations",
       "name": "Integrations",
       "icon": "puzzlepiece.extension",
-      "products": ""
+      "productsPath": ""
     },
     {
       "id": "advanced-hosting",
       "name": "Advanced Hosting",
       "icon": "server.rack",
-      "products": ""
+      "productsPath": ""
     },
     {
       "id": "accessories",
       "name": "Accessories",
       "icon": "bag.fill",
-      "products": ""
+      "productsPath": ""
     }
   ]
 }

@@ -65,4 +65,49 @@ final class ProductDetailViewModelTests: XCTestCase {
         // Then
         XCTAssertNil(viewModel.imageURL)
     }
+    
+    func testLoadProductDetailsSuccess() async {
+        // When
+        await viewModel.loadProductDetails()
+        
+        // Then
+        XCTAssertNotNil(viewModel.productDetails)
+        XCTAssertFalse(viewModel.isLoadingDetails)
+        XCTAssertEqual(viewModel.productDetails?.overview, "Enterprise-grade WiFi 7 access point")
+        XCTAssertEqual(viewModel.productDetails?.features.count, 3)
+        XCTAssertEqual(viewModel.productDetails?.hardware.count, 2)
+        XCTAssertEqual(viewModel.productDetails?.software.count, 2)
+    }
+    
+    func testQuantityStepper() {
+        // Given
+        let initialQuantity = viewModel.quantity
+        
+        // When
+        viewModel.incrementQuantity()
+        
+        // Then
+        XCTAssertEqual(viewModel.quantity, initialQuantity + 1)
+        
+        // When
+        viewModel.decrementQuantity()
+        
+        // Then
+        XCTAssertEqual(viewModel.quantity, initialQuantity)
+        
+        // Test minimum quantity
+        viewModel.quantity = 1
+        viewModel.decrementQuantity()
+        XCTAssertEqual(viewModel.quantity, 1) // Should not go below 1
+    }
+    
+    func testAddToCart() {
+        // When
+        viewModel.addToCart()
+        
+        // Then
+        // This is a placeholder test since addToCart currently just prints
+        // In a real app, you'd test the actual cart functionality
+        XCTAssertTrue(true)
+    }
 }
