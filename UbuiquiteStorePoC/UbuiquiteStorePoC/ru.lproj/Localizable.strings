@@ -1,0 +1,64 @@
+/* Store View */
+"loading_categories" = "Загрузка категорий...";
+"error" = "Ошибка";
+"retry" = "Повторить";
+"unifi" = "UniFi";
+"search_products_placeholder" = "Поиск продуктов...";
+"categories" = "Категории";
+"products" = "Продукты";
+"items_count" = "%d товаров";
+"loading_products" = "Загрузка продуктов...";
+"no_products_available" = "Нет доступных продуктов";
+"no_products_in_category" = "В этой категории пока нет продуктов.";
+
+/* Product Card */
+"euro_symbol" = "€";
+"frequency_separator" = "•";
+
+/* Product Detail View */
+"partner" = "ПАРТНЕРСКАЯ";
+"program" = "ПРОГРАММА";
+"description" = "Описание";
+"specifications" = "Характеристики";
+"wifi_standard" = "WiFi стандарт: %@";
+"frequency" = "Частота: %@";
+"purchase_options" = "Варианты покупки";
+"quantity" = "Количество:";
+"add_to_cart" = "Добавить в корзину";
+"overview" = "Обзор";
+"features" = "Функции";
+"hardware" = "Аппаратное обеспечение";
+"software" = "Программное обеспечение";
+"loading_additional_details" = "Загрузка дополнительной информации...";
+
+/* Banner */
+"introducing" = "Представляем";
+"wifi_7_high_performance" = "WiFi 7 для высокопроизводительных сетей";
+
+/* Error Messages */
+"failed_to_load_categories" = "Не удалось загрузить категории";
+"failed_to_load_products" = "Не удалось загрузить продукты";
+
+/* Test Data */
+"wifi" = "WiFi";
+"switches" = "Коммутаторы";
+"network" = "сеть";
+"cloud_gateways" = "Облачные шлюзы";
+"switching" = "Коммутация";
+"camera_security" = "Безопасность камер";
+"door_access" = "Доступ к дверям";
+"integrations" = "Интеграции";
+"advanced_hosting" = "Продвинутый хостинг";
+"accessories" = "Аксессуары";
+
+/* Hardware Specs */
+"weight" = "Вес";
+"management" = "Управление";
+"certifications" = "Сертификаты";
+
+/* Language Switcher */
+"language" = "Язык";
+"done" = "Готово";
+
+/* Navigation */
+"product_details" = "Детали продукта";

@@ -15,8 +15,8 @@ struct BannerItem: Identifiable {
     static var bannerDemoItem: BannerItem {
         return BannerItem(id: "u7",
                           name: "UniFi U7 Pro",
-                          subtitle: "WiFi 7 for high-performance networks",
-                          introText: "Introducing",
+                          subtitle: "wifi_7_high_performance".localized,
+                          introText: "introducing".localized,
                           initials: "U7")
     }
 }

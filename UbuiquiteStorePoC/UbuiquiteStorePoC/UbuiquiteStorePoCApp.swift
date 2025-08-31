@@ -15,6 +15,7 @@ struct UbuiquiteStorePoCApp: App {
                                          imgRepository: UImageRepository(),
                                          bannerItem: BannerItem.bannerDemoItem))
                 .preferredColorScheme(.none) // Allow system to choose light/dark mode
+                .environmentObject(LocalizationManager.shared)
         }
     }
 }

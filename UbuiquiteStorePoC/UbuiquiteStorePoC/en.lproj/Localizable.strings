@@ -1,0 +1,64 @@
+/* Store View */
+"loading_categories" = "Loading categories...";
+"error" = "Error";
+"retry" = "Retry";
+"unifi" = "UniFi";
+"search_products_placeholder" = "Search products...";
+"categories" = "Categories";
+"products" = "Products";
+"items_count" = "%d items";
+"loading_products" = "Loading products...";
+"no_products_available" = "No products available";
+"no_products_in_category" = "This category doesn't have any products yet.";
+
+/* Product Card */
+"euro_symbol" = "€";
+"frequency_separator" = "•";
+
+/* Product Detail View */
+"partner" = "PARTNER";
+"program" = "PROGRAM";
+"description" = "Description";
+"specifications" = "Specifications";
+"wifi_standard" = "WiFi Standard: %@";
+"frequency" = "Frequency: %@";
+"purchase_options" = "Purchase Options";
+"quantity" = "Quantity:";
+"add_to_cart" = "Add to Cart";
+"overview" = "Overview";
+"features" = "Features";
+"hardware" = "Hardware";
+"software" = "Software";
+"loading_additional_details" = "Loading additional details...";
+
+/* Banner */
+"introducing" = "Introducing";
+"wifi_7_high_performance" = "WiFi 7 for high-performance networks";
+
+/* Error Messages */
+"failed_to_load_categories" = "Failed to load categories";
+"failed_to_load_products" = "Failed to load products";
+
+/* Test Data */
+"wifi" = "WiFi";
+"switches" = "Switches";
+"network" = "network";
+"cloud_gateways" = "Cloud Gateways";
+"switching" = "Switching";
+"camera_security" = "Camera Security";
+"door_access" = "Door Access";
+"integrations" = "Integrations";
+"advanced_hosting" = "Advanced Hosting";
+"accessories" = "Accessories";
+
+/* Hardware Specs */
+"weight" = "Weight";
+"management" = "Management";
+"certifications" = "Certifications";
+
+/* Language Switcher */
+"language" = "Language";
+"done" = "Done";
+
+/* Navigation */
+"product_details" = "Product Details";

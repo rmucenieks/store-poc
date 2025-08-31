@@ -9,6 +9,8 @@ import SwiftUI
 
 struct StoreView: View {
     @ObservedObject private var viewModel: StoreViewModel
+    @StateObject private var localizationManager = LocalizationManager.shared
+    @State private var showingLanguageSwitcher = false
 
     public init(vm: StoreViewModel) {
         self.viewModel = vm
@@ -33,7 +35,7 @@ struct StoreView: View {
                             VStack {
                                 ProgressView()
                                     .scaleEffect(1.2)
-                                Text("Loading categories...")
+                                Text("loading_categories".localized)
                                     .font(.subheadline)
                                     .foregroundColor(Color(.secondaryLabel))
                                     .padding(.top, 8)
@@ -50,7 +52,7 @@ struct StoreView: View {
                                     .font(.system(size: 32))
                                     .foregroundColor(.orange)
                                 
-                                Text("Error")
+                                Text("error".localized)
                                     .font(.headline)
                                     .fontWeight(.medium)
                                 
@@ -59,7 +61,7 @@ struct StoreView: View {
                                     .foregroundColor(.secondary)
                                     .multilineTextAlignment(.center)
                                 
-                                Button("Retry") {
+                                Button("retry".localized) {
                                     Task {
                                         await viewModel.loadCategories()
                                     }
@@ -93,6 +95,9 @@ struct StoreView: View {
         .task {
             await viewModel.loadCategories()
         }
+        .sheet(isPresented: $showingLanguageSwitcher) {
+            LanguageSwitcherView()
+        }
     }
     
     private var headerView: some View {
@@ -103,6 +108,22 @@ struct StoreView: View {
                     .fontWeight(.bold)
                 
                 Spacer()
+                
+                Button(action: {
+                    showingLanguageSwitcher = true
+                }) {
+                    HStack(spacing: 4) {
+                        Text(localizationManager.currentLanguage.flag)
+                            .font(.title3)
+                        Text(localizationManager.currentLanguage.rawValue.uppercased())
+                            .font(.caption)
+                            .fontWeight(.medium)
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.blue.opacity(0.1))
+                    .cornerRadius(8)
+                }
             }
             
             // Search Bar
@@ -110,7 +131,7 @@ struct StoreView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.secondary)
                 
-                TextField("Search products...", text: $viewModel.searchText)
+                TextField("search_products_placeholder".localized, text: $viewModel.searchText)
                     .textFieldStyle(PlainTextFieldStyle())
                 
                 if !viewModel.searchText.isEmpty {
@@ -134,7 +155,7 @@ struct StoreView: View {
 
     private var categoriesView: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Categories")
+            Text("categories".localized)
                 .font(.headline)
                 .fontWeight(.semibold)
             
@@ -159,16 +180,16 @@ struct StoreView: View {
     private var productsView: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("Products")
+                Text("products".localized)
                     .font(.headline)
                     .fontWeight(.semibold)
                 
                 Spacer()
                 
                 if !viewModel.products.isEmpty {
-                                    Text("\(viewModel.filteredProducts.count) items")
-                    .font(.caption)
-                    .foregroundColor(Color(.secondaryLabel))
+                    Text(String(format: "items_count".localized, viewModel.filteredProducts.count))
+                        .font(.caption)
+                        .foregroundColor(Color(.secondaryLabel))
                 }
             }
             
@@ -186,10 +207,10 @@ struct StoreView: View {
         VStack {
             ProgressView()
                 .scaleEffect(1.2)
-                            Text("Loading products...")
-                    .font(.subheadline)
-                    .foregroundColor(Color(.secondaryLabel))
-                    .padding(.top, 8)
+            Text("loading_products".localized)
+                .font(.subheadline)
+                .foregroundColor(Color(.secondaryLabel))
+                .padding(.top, 8)
         }
         .frame(maxWidth: .infinity, minHeight: 200)
     }
@@ -200,11 +221,11 @@ struct StoreView: View {
                 .font(.system(size: 48))
                 .foregroundColor(Color(.secondaryLabel))
             
-            Text("No products available")
+            Text("no_products_available".localized)
                 .font(.headline)
                 .fontWeight(.medium)
             
-            Text("This category doesn't have any products yet.")
+            Text("no_products_in_category".localized)
                 .font(.subheadline)
                 .foregroundColor(Color(.secondaryLabel))
                 .multilineTextAlignment(.center)

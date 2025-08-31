@@ -56,7 +56,7 @@ final class StoreViewModelTests: XCTestCase {
         XCTAssertNil(viewModel.selectedCategory)
         XCTAssertFalse(viewModel.isLoadingCategories)
         XCTAssertNotNil(viewModel.errorMessage)
-        XCTAssertTrue(viewModel.errorMessage!.contains("Failed to load categories"))
+        XCTAssertTrue(viewModel.errorMessage!.contains("failed_to_load_categories".localized))
     }
     
     func testSelectCategorySuccess() async {
@@ -91,7 +91,7 @@ final class StoreViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.products.isEmpty)
         XCTAssertFalse(viewModel.isLoadingProducts)
         XCTAssertNotNil(viewModel.errorMessage)
-        XCTAssertTrue(viewModel.errorMessage!.contains("Failed to load products"))
+        XCTAssertTrue(viewModel.errorMessage!.contains("failed_to_load_products".localized))
     }
     
     func testSelectCategoryWithEmptyProducts() async {

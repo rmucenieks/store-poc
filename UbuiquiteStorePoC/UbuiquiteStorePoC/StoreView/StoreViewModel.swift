@@ -65,7 +65,7 @@ class StoreViewModel: ObservableObject {
                 await loadProducts(productsPath: firstCategory.productsPath)
             }
         case .failure(let error):
-            errorMessage = "Failed to load categories: \(error.localizedDescription)"
+            errorMessage = "failed_to_load_categories".localized + ": \(error.localizedDescription)"
         }
         
         isLoadingCategories = false
@@ -94,7 +94,7 @@ class StoreViewModel: ObservableObject {
         case .success(let products):
             self.products = products
         case .failure(let error):
-            errorMessage = "Failed to load products: \(error.localizedDescription)"
+            errorMessage = "failed_to_load_products".localized + ": \(error.localizedDescription)"
         }
         
         isLoadingProducts = false

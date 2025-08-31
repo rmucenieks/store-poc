@@ -63,7 +63,7 @@ struct ProductCard: View {
                         .foregroundColor(.blue)
 
                     if let frequency = product.frequency {
-                        Text("• \(frequency)")
+                        Text(String(format: "frequency_separator".localized, frequency))
                             .font(.caption)
                             .foregroundColor(Color(.secondaryLabel))
                     }
@@ -71,7 +71,7 @@ struct ProductCard: View {
 
                 Spacer(minLength: 0)
 
-                Text("€\(String(format: "%.2f", product.price))")
+                Text(String(format: "euro_symbol".localized + "%.2f", product.price))
                     .font(.headline)
                     .fontWeight(.bold)
                     .foregroundColor(.blue)

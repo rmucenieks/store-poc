@@ -49,12 +49,12 @@ struct ProductDetailView: View {
                                 .frame(height: 1)
                                 .padding(.horizontal, 4)
                             
-                            Text("PARTNER")
+                            Text("partner".localized)
                                 .font(.caption2)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                             
-                            Text("PROGRAM")
+                            Text("program".localized)
                                 .font(.caption2)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -75,7 +75,7 @@ struct ProductDetailView: View {
                             .font(.title)
                             .fontWeight(.bold)
                         
-                        Text("€\(String(format: "%.2f", viewModel.product.price))")
+                        Text(String(format: "euro_symbol".localized + "%.2f", viewModel.product.price))
                             .font(.title2)
                             .fontWeight(.semibold)
                             .foregroundColor(.blue)
@@ -83,7 +83,7 @@ struct ProductDetailView: View {
                     
                     // Product Description
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Description")
+                        Text("description".localized)
                             .font(.headline)
                             .fontWeight(.semibold)
                         
@@ -94,7 +94,7 @@ struct ProductDetailView: View {
                     
                     // Specifications
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Specifications")
+                        Text("specifications".localized)
                             .font(.headline)
                             .fontWeight(.semibold)
                         
@@ -102,7 +102,7 @@ struct ProductDetailView: View {
                             HStack {
                                 Image(systemName: "wifi")
                                     .foregroundColor(.blue)
-                                Text("WiFi Standard: \(viewModel.product.wifiStandard)")
+                                Text(String(format: "wifi_standard".localized, viewModel.product.wifiStandard))
                                     .font(.subheadline)
                             }
                             
@@ -110,7 +110,7 @@ struct ProductDetailView: View {
                                 HStack {
                                     Image(systemName: "waveform")
                                         .foregroundColor(.blue)
-                                    Text("Frequency: \(frequency)")
+                                    Text(String(format: "frequency".localized, frequency))
                                         .font(.subheadline)
                                 }
                             }
@@ -121,13 +121,13 @@ struct ProductDetailView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         Divider()
                         
-                        Text("Purchase Options")
+                        Text("purchase_options".localized)
                             .font(.headline)
                             .fontWeight(.semibold)
                         
                         // Quantity Stepper
                         HStack {
-                            Text("Quantity:")
+                            Text("quantity".localized)
                                 .font(.subheadline)
                                 .fontWeight(.medium)
                             
@@ -158,7 +158,7 @@ struct ProductDetailView: View {
                         Button(action: viewModel.addToCart) {
                             HStack {
                                 Image(systemName: "cart.badge.plus")
-                                Text("Add to Cart")
+                                Text("add_to_cart".localized)
                             }
                             .font(.headline)
                             .fontWeight(.semibold)
@@ -174,9 +174,9 @@ struct ProductDetailView: View {
                     if let details = viewModel.productDetails {
                         // Overview Section
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Overview")
-                                .font(.headline)
-                                .fontWeight(.semibold)
+                                                    Text("overview".localized)
+                            .font(.headline)
+                            .fontWeight(.semibold)
                             
                             Text(details.overview)
                                 .font(.body)
@@ -185,9 +185,9 @@ struct ProductDetailView: View {
                         
                         // Features Section
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Features")
-                                .font(.headline)
-                                .fontWeight(.semibold)
+                                                    Text("features".localized)
+                            .font(.headline)
+                            .fontWeight(.semibold)
                             
                             VStack(alignment: .leading, spacing: 4) {
                                 ForEach(details.features, id: \.self) { feature in
@@ -205,9 +205,9 @@ struct ProductDetailView: View {
                         
                         // Hardware Section
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Hardware")
-                                .font(.headline)
-                                .fontWeight(.semibold)
+                                                    Text("hardware".localized)
+                            .font(.headline)
+                            .fontWeight(.semibold)
                             
                             VStack(alignment: .leading, spacing: 4) {
                                 ForEach(details.hardware, id: \.property) { spec in
@@ -227,9 +227,9 @@ struct ProductDetailView: View {
                         
                         // Software Section
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Software")
-                                .font(.headline)
-                                .fontWeight(.semibold)
+                                                    Text("software".localized)
+                            .font(.headline)
+                            .fontWeight(.semibold)
                             
                             VStack(alignment: .leading, spacing: 4) {
                                 ForEach(details.software, id: \.property) { spec in
@@ -254,7 +254,7 @@ struct ProductDetailView: View {
                             HStack {
                                 ProgressView()
                                     .scaleEffect(0.8)
-                                Text("Loading additional details...")
+                                Text("loading_additional_details".localized)
                                     .font(.subheadline)
                                     .foregroundColor(Color(.secondaryLabel))
                             }
@@ -266,7 +266,7 @@ struct ProductDetailView: View {
                 .padding(.horizontal, 16)
             }
         }
-        .navigationTitle("Product Details")
+        .navigationTitle("product_details".localized)
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await viewModel.loadProductDetails()

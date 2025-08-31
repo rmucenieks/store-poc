@@ -16,11 +16,11 @@ class MockAPIService: APIServiceProtocol {
         features: ["WiFi 7", "10 GbE uplink", "Tri-radio"],
         hardware: [
             HardwareSpec(property: "Max. Power Consumption", value: "43W"),
-            HardwareSpec(property: "Weight", value: "1.8 kg")
+            HardwareSpec(property: "weight".localized, value: "1.8 kg")
         ],
         software: [
-            SoftwareSpec(property: "Management", value: "Ethernet"),
-            SoftwareSpec(property: "Certifications", value: "CE, FCC, IC")
+            SoftwareSpec(property: "management".localized, value: "Ethernet"),
+            SoftwareSpec(property: "certifications".localized, value: "CE, FCC, IC")
         ]
     ))
     var imageURL: URL?

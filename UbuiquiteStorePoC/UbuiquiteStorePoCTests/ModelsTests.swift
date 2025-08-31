@@ -26,7 +26,7 @@ final class ModelsTests: XCTestCase {
         
         // Then
         XCTAssertEqual(category.id, "wifi")
-        XCTAssertEqual(category.name, "WiFi")
+        XCTAssertEqual(category.name, "wifi".localized)
         XCTAssertEqual(category.icon, "wifi")
         XCTAssertEqual(category.products, "wifi-products.json")
     }
@@ -47,7 +47,7 @@ final class ModelsTests: XCTestCase {
         
         // Then
         XCTAssertEqual(category.id, "switches")
-        XCTAssertEqual(category.name, "Switches")
+        XCTAssertEqual(category.name, "switches".localized)
         XCTAssertEqual(category.icon, "network")
         XCTAssertNil(category.products)
     }

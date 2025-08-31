@@ -1,0 +1,64 @@
+/* Store View */
+"loading_categories" = "Ielādē kategorijas...";
+"error" = "Kļūda";
+"retry" = "Mēģināt vēlreiz";
+"unifi" = "UniFi";
+"search_products_placeholder" = "Meklēt produktus...";
+"categories" = "Kategorijas";
+"products" = "Produkti";
+"items_count" = "%d preces";
+"loading_products" = "Ielādē produktus...";
+"no_products_available" = "Nav pieejamu produktu";
+"no_products_in_category" = "Šai kategorijai vēl nav produktu.";
+
+/* Product Card */
+"euro_symbol" = "€";
+"frequency_separator" = "•";
+
+/* Product Detail View */
+"partner" = "PARTNERA";
+"program" = "PROGRAMS";
+"description" = "Apraksts";
+"specifications" = "Specifikācija";
+"wifi_standard" = "WiFi standarts: %@";
+"frequency" = "Frekvence: %@";
+"purchase_options" = "Pirkuma iespējas";
+"quantity" = "Daudzums:";
+"add_to_cart" = "Pievienot grozam";
+"overview" = "Pārskats";
+"features" = "Funkcijas";
+"hardware" = "Aparatūra";
+"software" = "Programmatūra";
+"loading_additional_details" = "Ielādē papildu informāciju...";
+
+/* Banner */
+"introducing" = "Iepazīstinām";
+"wifi_7_high_performance" = "WiFi 7 augstas veiktspējas tīkliem";
+
+/* Error Messages */
+"failed_to_load_categories" = "Neizdevās ielādēt kategorijas";
+"failed_to_load_products" = "Neizdevās ielādēt produktus";
+
+/* Test Data */
+"wifi" = "WiFi";
+"switches" = "Komutatori";
+"network" = "tīkls";
+"cloud_gateways" = "Mākoņa vārti";
+"switching" = "Komutēšana";
+"camera_security" = "Kamera drošība";
+"door_access" = "Durvju piekļuve";
+"integrations" = "Integrācijas";
+"advanced_hosting" = "Uzlabots hosting";
+"accessories" = "Piederumi";
+
+/* Hardware Specs */
+"weight" = "Svars";
+"management" = "Pārvaldība";
+"certifications" = "Sertifikāti";
+
+/* Language Switcher */
+"language" = "Valoda";
+"done" = "Gatavs";
+
+/* Navigation */
+"product_details" = "Produkta detaļas";
