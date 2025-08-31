@@ -261,15 +261,16 @@ struct StoreView: View {
         LazyVGrid(columns: gridColumns, spacing: 16) {
             ForEach(vm.filteredProducts) { product in
 ////                //TODO: Check this! If this not initialized already Product Detaisl VM!!!
-//                NavigationLink(destination: ProductDetailView(vm: ProductDetailViewModel(product: product,
-//                                                                                         repository: UProductDetailsRepository(localizer: vm.langHandler),
-//                                                                                         imgRepository: UImageRepository(),
-//                                                                                         localizer: vm.langHandler)) {
-//                    ProductCard(product: product,
-//                                imageURL: vm.imageURL(imageName: product.imageUrl),
-//                                localizer: vm.langHandler)
-//                }
-//                .buttonStyle(PlainButtonStyle())
+                ///
+                NavigationLink(destination: ProductDetailView(vm: ProductDetailViewModel(product: product,
+                                                                                         repository: UProductDetailsRepository(localizer: vm.langHandler),
+                                                                                         imgRepository: UImageRepository(),
+                                                                                         localizer: vm.langHandler))) {
+                    ProductCard(product: product,
+                                imageURL: vm.imageURL(imageName: product.imageUrl),
+                                localizer: vm.langHandler)
+                }
+                .buttonStyle(PlainButtonStyle())
             }
         }
     }
