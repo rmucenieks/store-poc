@@ -9,11 +9,14 @@ import SwiftUI
 
 struct StoreView: View {
     @ObservedObject private var vm: StoreViewModel
-    @State private var showingLanguageSwitcher = false
-//    @State private var showingLocalizationTest = false
+    @ObservedObject var cartModelVM: CartViewModel
 
-    public init(vm: StoreViewModel) {
+    @State private var showingLanguageSwitcher = false
+    @State private var showingCart = false
+
+    public init(vm: StoreViewModel, cartModelVM: CartViewModel) {
         self.vm = vm
+        self.cartModelVM = cartModelVM
     }
     
     var body: some View {
@@ -44,23 +47,23 @@ struct StoreView: View {
                         } else if !vm.categories.isEmpty {
                             categoriesView
                         }
-                        
+
                         // Error Message
                         if let errorMessage = vm.errorMessage {
                             VStack(spacing: 12) {
                                 Image(systemName: "exclamationmark.triangle")
                                     .font(.system(size: 32))
                                     .foregroundColor(.orange)
-                                
+
                                 Text(vm.langHandler.localized("error"))
                                     .font(.headline)
                                     .fontWeight(.medium)
-                                
+
                                 Text(errorMessage)
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                                     .multilineTextAlignment(.center)
-                                
+
                                 Button(vm.langHandler.localized("retry")) {
                                     Task {
                                         await vm.loadCategories()
@@ -72,7 +75,7 @@ struct StoreView: View {
                             .background(Color.orange.opacity(0.1))
                             .cornerRadius(12)
                         }
-                        
+
                         // Products
                         productsView
                     }
@@ -97,6 +100,11 @@ struct StoreView: View {
         }
         .sheet(isPresented: $showingLanguageSwitcher) {
             LanguageSwitcherView(localization: vm.langHandler)
+        }
+        .sheet(isPresented: $showingCart) {
+            NavigationStack {
+                CartView(vm: cartModelVM)
+            }
         }
 //        .sheet(isPresented: $showingLocalizationTest) {
 //            LocalizationTestView()
@@ -128,26 +136,28 @@ struct StoreView: View {
                     .cornerRadius(8)
                 }
                 
-                // Debug button - long press to show language info
+                // Cart Button
                 Button(action: {
-                    print(vm.langHandler.getCurrentLanguageInfo())
+                    showingCart = true
                 }) {
-                    Image(systemName: "info.circle")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                    ZStack {
+                        Image(systemName: "cart")
+                            .font(.title3)
+                            .foregroundColor(.blue)
+                        
+                        if cartModelVM.totalItems > 0 {
+                            Text("\(cartModelVM.totalItems)")
+                                .font(.caption2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(width: 16, height: 16)
+                                .background(Color.red)
+                                .clipShape(Circle())
+                                .offset(x: 8, y: -8)
+                        }
+                    }
                 }
-                .onLongPressGesture {
-                    print(vm.langHandler.getCurrentLanguageInfo())
-                }
-                
-//                // Localization Test Button
-//                Button(action: {
-//                    showingLocalizationTest = true
-//                }) {
-//                    Image(systemName: "textformat.abc")
-//                        .font(.caption)
-//                        .foregroundColor(.secondary)
-//                }
+
             }
             
             // Search Bar
@@ -265,10 +275,11 @@ struct StoreView: View {
                 NavigationLink(destination: ProductDetailView(vm: ProductDetailViewModel(product: product,
                                                                                          repository: UProductDetailsRepository(localizer: vm.langHandler),
                                                                                          imgRepository: UImageRepository(),
-                                                                                         localizer: vm.langHandler))) {
+                                                                                         localizer: vm.langHandler), cartViewModel: cartModelVM)) {
                     ProductCard(product: product,
                                 imageURL: vm.imageURL(imageName: product.imageUrl),
-                                localizer: vm.langHandler)
+                                localizer: vm.langHandler,
+                                cartViewModel: cartModelVM)
                 }
                 .buttonStyle(PlainButtonStyle())
             }
@@ -309,11 +320,11 @@ struct StoreView: View {
 
     let handler = LocalizationHandler(language: .english)
     let bannerItem = BannerItem.bannerDemoItem(localizer: localizer)
-
+let cartModel = CartViewModel(localizer: localizer)
     StoreView(vm: StoreViewModel(repository: UStoreRepository(localizer: localizer),
                                  imgRepository: UImageRepository(),
                                  bannerItem: bannerItem,
-                                 langHandler: handler))
+                                 langHandler: handler), cartModelVM: cartModel)
 }
 
 

@@ -11,7 +11,7 @@ import UIKit
 @MainActor //TODO: what is this?
 class StoreViewModel: ObservableObject {
     private let repository: StoreRepository
-    private let imgRepository: ImageRepository //TODO: use it also in the store picture fetch
+    private let imgRepository: ImageRepository
     @Published var langHandler: LocalizationHandler
 
     @Published var categories: [ProductCategory] = []
@@ -52,7 +52,7 @@ class StoreViewModel: ObservableObject {
         self.imgRepository = imgRepository
         self.langHandler = langHandler
         self.bannerItem = bannerItem
-        
+
         // Listen for language changes to reload data
         NotificationCenter.default.addObserver(
             forName: .languageChanged,
@@ -61,10 +61,15 @@ class StoreViewModel: ObservableObject {
         ) { [weak self] _ in
             Task {
                 await self?.loadCategories()
+                await self?.reloadBannerItem()
             }
         }
     }
-    
+
+    func reloadBannerItem() async {
+        self.bannerItem = BannerItem.bannerDemoItem(localizer: langHandler)
+    }
+
     func loadCategories() async {
         isLoadingCategories = true
         errorMessage = nil

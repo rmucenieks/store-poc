@@ -9,9 +9,13 @@ import SwiftUI
 
 struct ProductDetailView: View {
     @ObservedObject private var vm: ProductDetailViewModel
+    @ObservedObject private var cartViewModel: CartViewModel
+    @State private var showAddedToCart: Bool = false
+    @Environment(\.dismiss) private var dismiss
 
-    init(vm: ProductDetailViewModel) {
+    init(vm: ProductDetailViewModel, cartViewModel: CartViewModel) {
         self.vm = vm
+        self.cartViewModel = cartViewModel
     }
     
     var body: some View {
@@ -19,6 +23,7 @@ struct ProductDetailView: View {
             VStack(alignment: .leading, spacing: 20) {
                 // Product Image with Partner Program Badge
                 ZStack(alignment: .topLeading) {
+
                     AsyncImage(url: vm.imageURL) { image in
                         image
                             .resizable()
@@ -35,35 +40,17 @@ struct ProductDetailView: View {
                     .frame(height: 300)
                     .cornerRadius(12)
                     .background(Color(.systemGray6))
-                    
-                    // Partner Program Badge
+
+                    // Partner Program Badge - positioned above product image
                     if vm.product.partnerProgram {
-                        VStack(spacing: 0) {
-                            Text("UniFi")
-                                .font(.caption2)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                            
-                            Rectangle()
-                                .fill(Color.white)
-                                .frame(height: 1)
-                                .padding(.horizontal, 4)
-                            Text(vm.localizer.localized("partner"))
-                                .font(.caption2)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                            
-                            Text(vm.localizer.localized("program"))
-                                .font(.caption2)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                        }
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 4)
-                        .background(Color.black)
-                        .cornerRadius(6)
-                        .shadow(color: .black.opacity(0.2), radius: 2, x: 0, y: 1)
-                        .padding(16)
+                        HStack {
+                            Image("PartnerProgram")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 80, height: 60)
+
+                            Spacer()
+                        }.padding()
                     }
                 }
                 
@@ -154,7 +141,10 @@ struct ProductDetailView: View {
                         }
                         
                         // Add to Cart Button
-                        Button(action: vm.addToCart) {
+                        Button(action: {
+                            cartViewModel.addToCart(product: vm.product, quantity: vm.quantity)
+                            showAddedToCart = true
+                        }) {
                             HStack {
                                 Image(systemName: "cart.badge.plus")
                                 Text(vm.localizer.localized("add_to_cart"))
@@ -166,6 +156,12 @@ struct ProductDetailView: View {
                             .padding()
                             .background(Color.blue)
                             .cornerRadius(12)
+                        }
+                        .alert(vm.product.name, isPresented: $showAddedToCart) {
+                            Button(vm.localizer.localized("ok")) {
+                            }
+                        } message: {
+                            Text(vm.localizer.localized("product_added_successfully"))
                         }
                     }
                     
@@ -269,6 +265,19 @@ struct ProductDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await vm.loadProductDetails()
+        }
+        .navigationBarBackButtonHidden(true) // Hide default back button
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    dismiss()
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                        Text(vm.localizer.localized("back"))
+                    }
+                }
+            }
         }
     }
 }

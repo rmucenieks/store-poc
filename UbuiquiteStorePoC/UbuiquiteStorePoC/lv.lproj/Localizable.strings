@@ -63,3 +63,24 @@
 
 /* Navigation */
 "product_details" = "Produkta detaļas";
+
+/* Cart */
+"cart" = "Grozs";
+"close" = "Aizvērt";
+"clear" = "Notīrīt";
+"add_to_cart" = "Pievienot grozam";
+"your_cart_is_empty" = "Jūsu grozs ir tukšs";
+"add_some_products_to_get_started" = "Pievienojiet produktus, lai sāktu";
+"total_items" = "Kopā preces:";
+"total_price" = "Kopējā cena:";
+"purchase_items" = "Pirkt preces";
+"purchase_successful" = "Pirkums veiksmīgs!";
+"your_items_have_been_successfully_purchased" = "Jūsu preces ir veiksmīgi nopirktas!";
+"product_added_successfully" = "Produkts veiksmīgi tika pievienots";
+
+/* Alerts */
+"ok" = "Labi";
+
+/* Navigation */
+"cancel" = "Atcelt";
+"back" = "Atpakaļ";

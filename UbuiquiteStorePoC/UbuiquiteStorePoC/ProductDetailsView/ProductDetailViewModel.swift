@@ -56,9 +56,4 @@ class ProductDetailViewModel: ObservableObject {
             quantity -= 1
         }
     }
-    
-    func addToCart() {
-        // TODO: Implement add to cart functionality
-        print("Adding \(quantity) \(product.name) to cart")
-    }
 }

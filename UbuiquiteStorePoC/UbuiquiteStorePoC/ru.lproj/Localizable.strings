@@ -63,3 +63,25 @@
 
 /* Navigation */
 "product_details" = "Детали продукта";
+
+/* Cart */
+"cart" = "Корзина";
+"close" = "Закрыть";
+"clear" = "Очистить";
+"add_to_cart" = "Добавить в корзину";
+"your_cart_is_empty" = "Ваша корзина пуста";
+"add_some_products_to_get_started" = "Добавьте продукты для начала";
+"total_items" = "Всего товаров:";
+"total_price" = "Общая цена:";
+"purchase_items" = "Купить товары";
+"purchase_successful" = "Покупка успешна!";
+"your_items_have_been_successfully_purchased" = "Ваши товары были успешно куплены!";
+"product_added_successfully" = "Товар успешно добавлен";
+
+
+/* Alerts */
+"ok" = "Ок";
+
+/* Navigation */
+"cancel" = "Отмена";
+"back" = "Назад";

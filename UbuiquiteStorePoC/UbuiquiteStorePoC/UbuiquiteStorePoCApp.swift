@@ -13,9 +13,11 @@ struct UbuiquiteStorePoCApp: App {
         WindowGroup {
             let localizer = LocalizationHandler()
             let bannerItem = BannerItem.bannerDemoItem(localizer: localizer)
+            let cartVM = CartViewModel(localizer: localizer)
             StoreView(vm: StoreViewModel(repository: UStoreRepository(localizer: localizer),
                                          imgRepository: UImageRepository(),
-                                         bannerItem: bannerItem, langHandler: localizer))
+                                         bannerItem: bannerItem,
+                                         langHandler: localizer), cartModelVM: cartVM)
                 .preferredColorScheme(.none) // Allow system to choose light/dark mode
         }
     }
