@@ -13,16 +13,8 @@ struct StoreView: View {
     public init(vm: StoreViewModel) {
         self.viewModel = vm
     }
-
-    private var horizontalPadding: CGFloat {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return 32 // More padding for iPad
-        } else {
-            return 16 // Standard padding for iPhone
-        }
-    }
     
-        var body: some View {
+    var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 // Header
@@ -33,8 +25,9 @@ struct StoreView: View {
                     ScrollView {
                         VStack(spacing: 20) {
                             // Banner
-                            BannerView()
-                        
+                            BannerView(bannerItem: viewModel.bannerItem,
+                                       storeURL: viewModel.storeURL)
+
                         // Categories
                         if viewModel.isLoadingCategories {
                             VStack {
@@ -81,7 +74,7 @@ struct StoreView: View {
                         // Products
                         productsView
                     }
-                    .padding(.horizontal, horizontalPadding)
+                        .padding(.horizontal, viewModel.horizontalPadding)
                 }
                 
                 // Gradient overlay - positioned above scroll content
@@ -134,7 +127,7 @@ struct StoreView: View {
             .background(Color(.systemGray6))
             .cornerRadius(8)
         }
-        .padding(.horizontal, horizontalPadding)
+        .padding(.horizontal, viewModel.horizontalPadding)
         .padding(.top, 8)
         .padding(.bottom, 16)
     }
@@ -226,7 +219,8 @@ struct StoreView: View {
                 NavigationLink(destination: ProductDetailView(vm: ProductDetailViewModel(product: product,
                                                                                          repository: UProductDetailsRepository(),
                                                                                          imgRepository: UImageRepository()))) {
-                    ProductCard(product: product)
+                    ProductCard(product: product,
+                                imageURL: viewModel.imageURL(imageName: product.imageUrl))
                 }
                 .buttonStyle(PlainButtonStyle())
             }
@@ -253,7 +247,8 @@ struct StoreView: View {
 
 #Preview {
     StoreView(vm: StoreViewModel(repository: UStoreRepository(),
-                                 imgRepository: UImageRepository()))
+                                 imgRepository: UImageRepository(),
+                                 bannerItem: BannerItem.bannerDemoItem))
 }
 
 

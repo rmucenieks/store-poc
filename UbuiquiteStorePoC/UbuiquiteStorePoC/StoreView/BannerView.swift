@@ -9,23 +9,26 @@ import SwiftUI
 
 struct BannerView: View {
 
+    let bannerItem: BannerItem
+    let storeURL: URL?
+
     var body: some View {
         Button(action: {
-            if let url = URL(string: "https://store.ui.com/us/en") {
+            if let url = storeURL {
                 UIApplication.shared.open(url)
             }
         }) {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Introducing")
+                    Text(bannerItem.introText)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
 
-                    Text("UniFi U7 Pro")
+                    Text(bannerItem.name)
                         .font(.title)
                         .fontWeight(.bold)
 
-                    Text("WiFi 7 for high-performance networks")
+                    Text(bannerItem.subtitle)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -37,7 +40,7 @@ struct BannerView: View {
                     .fill(Color.blue.opacity(0.1))
                     .frame(width: 80, height: 80)
                     .overlay(
-                        Text("U7")
+                        Text(bannerItem.initials)
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.blue)
@@ -58,4 +61,8 @@ struct BannerButtonStyle: ButtonStyle {
             .opacity(configuration.isPressed ? 0.8 : 1.0)
             .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
     }
+}
+
+#Preview {
+    BannerView(bannerItem: BannerItem.bannerDemoItem, storeURL: nil)
 }

@@ -9,10 +9,12 @@ import SwiftUI
 struct CategoryCard: View {
     let category: ProductCategory
     let isSelected: Bool
-    let onTap: () -> Void //TODO: Void should be optional!!!!
+    let onTap: VoidFunc?
 
     var body: some View {
-        Button(action: onTap) {
+        Button(action:{
+            onTap?()
+        }) {
             VStack(spacing: 8) {
                 Image(systemName: category.icon)
                     .font(.title2)
@@ -32,6 +34,7 @@ struct CategoryCard: View {
 }
 
 #Preview {
+    //TODO: Preview different states
     CategoryCard(category: ProductCategory(id: "wifi",
                                            name: "Wifi",
                                            icon: "wifi",

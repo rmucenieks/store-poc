@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 @MainActor //TODO: what is this?
 class StoreViewModel: ObservableObject {
@@ -19,7 +20,18 @@ class StoreViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var selectedCategory: ProductCategory? //TODO: move this to id and find a object every time!!! Dont store actual objects
     @Published var searchText = ""
-    
+    @Published var bannerItem: BannerItem
+
+    var storeURL: URL? { return URL(string: "https://store.ui.com/us/en") }
+
+    var horizontalPadding: CGFloat {
+        if isIPad {
+            return 32 //More space for ipad
+        } else {
+            return 16 // Standard padding for iPhone
+        }
+    }
+
     var filteredProducts: [Product] {
         if searchText.isEmpty {
             return products
@@ -31,9 +43,12 @@ class StoreViewModel: ObservableObject {
         }
     }
     
-    init(repository: StoreRepository, imgRepository: ImageRepository) {
+    init(repository: StoreRepository,
+         imgRepository: ImageRepository,
+         bannerItem: BannerItem) {
         self.repository = repository
         self.imgRepository = imgRepository
+        self.bannerItem = bannerItem
     }
     
     func loadCategories() async {
@@ -61,6 +76,10 @@ class StoreViewModel: ObservableObject {
         await loadProducts(productsPath: category.productsPath)
     }
     
+    internal func imageURL(imageName: String) -> URL? {
+        imgRepository.getImageURL(for: imageName)
+    }
+
     func clearError() {
         errorMessage = nil
     }

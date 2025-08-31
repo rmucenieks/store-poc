@@ -8,6 +8,7 @@ import SwiftUI
 
 struct ProductCard: View {
     let product: Product
+    let imageURL: URL?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -24,7 +25,7 @@ struct ProductCard: View {
             }
 
             // Product Image
-            AsyncImage(url: URL(string: "https://raw.githubusercontent.com/rmucenieks/store-poc/main/API/store-pics/\(product.imageUrl)")) { image in
+            AsyncImage(url: imageURL) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -83,3 +84,9 @@ struct ProductCard: View {
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.1), radius: 4, x: 0, y: 2)
     }
 }
+
+#Preview {
+    ProductCard(product: Product.productDemoItem,
+                imageURL: URL(string: "https://raw.githubusercontent.com/rmucenieks/store-poc/main/API/store-pics/e7.avif"))
+}
+

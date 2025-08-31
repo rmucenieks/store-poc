@@ -27,4 +27,16 @@ struct Product: Identifiable, Decodable {
         case imageUrl
         case partnerProgram
     }
+
+    static var  productDemoItem: Product {
+        return Product(id: "e7",
+                       name: "E7",
+                       price: 499.00,
+                       description: "Enterprise-grade indoor/outdoor access point with WiFi 7 performance.",
+                       wifiStandard: "WiFi 7",
+                       frequency: "5GHz",
+                       imageUrl: "e7.avif",
+                       partnerProgram: true)
+    }
+
 }

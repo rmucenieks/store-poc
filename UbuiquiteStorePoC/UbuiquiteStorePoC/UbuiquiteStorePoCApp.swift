@@ -12,7 +12,8 @@ struct UbuiquiteStorePoCApp: App {
     var body: some Scene {
         WindowGroup {
             StoreView(vm: StoreViewModel(repository: UStoreRepository(),
-                                         imgRepository: UImageRepository()))
+                                         imgRepository: UImageRepository(),
+                                         bannerItem: BannerItem.bannerDemoItem))
                 .preferredColorScheme(.none) // Allow system to choose light/dark mode
         }
     }
