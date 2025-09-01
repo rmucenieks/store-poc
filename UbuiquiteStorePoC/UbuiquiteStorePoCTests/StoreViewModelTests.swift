@@ -225,10 +225,11 @@ final class StoreViewModelTests: XCTestCase {
             Product(id: "1", name: "Product 1", price: 100, description: "Description 1", wifiStandard: "WiFi 6", frequency: "5GHz", imageUrl: "img1.avif", partnerProgram: false),
             Product(id: "2", name: "Product 2", price: 200, description: "Description 2", wifiStandard: "WiFi 6", frequency: "5GHz", imageUrl: "img2.avif", partnerProgram: true)
         ]
+        let testCategory = ProductCategory(id: "cat1", name: "Category 1", icon: "icon1", productsPath: "test-products.json")
         mockRepository.mockProductsResult = .success(testProducts)
         
         // When
-        await sut.loadCategories() // This will trigger loadProducts internally
+        await sut.selectCategory(testCategory)
         
         // Then
         XCTAssertEqual(sut.products.count, 2)
@@ -312,6 +313,7 @@ final class StoreViewModelTests: XCTestCase {
         // Then
         // Banner should be updated (this tests the async nature)
         XCTAssertNotNil(sut.bannerItem)
+        XCTAssertNotEqual(sut.bannerItem.id, originalBanner.id)
     }
     
     // MARK: - Language Change Tests
@@ -362,6 +364,16 @@ class MockImageRepository: ImageRepository {
 
 class MockLocalizationHandler: LocalizationHandler {
     var mockLocalizedString: String = "Mock String"
+    var mockCurrentLanguage: Language = .english
+    
+    override var currentLanguage: Language {
+        get { return mockCurrentLanguage }
+        set { 
+            mockCurrentLanguage = newValue
+            // Post notification like the real LocalizationHandler does
+            NotificationCenter.default.post(name: .languageChanged, object: nil)
+        }
+    }
     
     override func localized(_ key: String) -> String {
         return mockLocalizedString
