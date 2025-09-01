@@ -31,7 +31,11 @@ internal struct UStoreRepository: StoreRepository {
         print("FETCH: URL: \(url)")
 
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            var request = URLRequest(url: url)
+            request.cachePolicy = .reloadIgnoringLocalCacheData
+
+            let (data, _) = try await URLSession.shared.data(for: request)
+
             let categoriesList = try JSONDecoder().decode(CategoryList.self, from: data)
             print("✅ Successfully loaded \(categoriesList.categories.count) categories for language: \(localizer.currentLangKey)")
             return .success(categoriesList.categories)
@@ -59,7 +63,11 @@ internal struct UStoreRepository: StoreRepository {
         print("FETCH: URL: \(url)")
 
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            var request = URLRequest(url: url)
+            request.cachePolicy = .reloadIgnoringLocalCacheData
+
+            let (data, _) = try await URLSession.shared.data(for: request)
+
             let productList = try JSONDecoder().decode(ProductList.self, from: data)
             print("✅ Successfully loaded \(productList.products.count) products for language: \(localizer.currentLangKey)")
             return .success(productList.products)

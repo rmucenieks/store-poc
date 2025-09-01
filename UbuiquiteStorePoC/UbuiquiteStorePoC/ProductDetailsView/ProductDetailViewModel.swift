@@ -14,7 +14,7 @@ class ProductDetailViewModel: ObservableObject {
 
     let product: Product
     let localizer: Localizer
-    @Published var productDetails: ProductDetails?
+    @Published var productDetails: ProductDetails? = nil
     @Published var isLoadingDetails = false
     @Published var quantity = 1
     
@@ -34,6 +34,7 @@ class ProductDetailViewModel: ObservableObject {
     
     func loadProductDetails() async {
         isLoadingDetails = true
+        self.productDetails = nil
         
         let result = await repository.fetchProductDetails(for: product.id)
 
@@ -42,6 +43,7 @@ class ProductDetailViewModel: ObservableObject {
             self.productDetails = details
         case .failure(let error):
             print("Failed to load product details: \(error)")
+            self.productDetails = nil
         }
         
         isLoadingDetails = false

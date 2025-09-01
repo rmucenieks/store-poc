@@ -15,6 +15,7 @@ struct StoreView: View {
     @State private var showingCart = false
     @State private var showAddedToCart = false
     @State private var alertProductName = ""
+    @FocusState private var isSearchFocused
 
     public init(vm: StoreViewModel, cartModelVM: CartViewModel) {
         self.vm = vm
@@ -54,8 +55,10 @@ struct StoreView: View {
                         productsView
                         }
                     .padding(.horizontal, vm.horizontalPadding)
+                }.onTapGesture {
+                    isSearchFocused = false
                 }
-                
+
                 // Gradient overlay - positioned above scroll content
                 LinearGradient(
                     gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground).opacity(0)]),
@@ -136,7 +139,9 @@ struct StoreView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.secondary)
                 
-                TextField(vm.langHandler.localized("search_products_placeholder"), text: $vm.searchText)
+                TextField(vm.langHandler.localized("search_products_placeholder"),
+                          text: $vm.searchText)
+                    .focused($isSearchFocused)
                     .textFieldStyle(PlainTextFieldStyle())
                 
                 if !vm.searchText.isEmpty {

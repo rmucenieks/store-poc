@@ -27,7 +27,11 @@ internal struct UProductDetailsRepository: ProductDetailsRepository {
         print("FETCH: URL: \(url)")
 
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            var request = URLRequest(url: url)
+            request.cachePolicy = .reloadIgnoringLocalCacheData
+
+            let (data, _) = try await URLSession.shared.data(for: request)
+
             let root = try JSONDecoder().decode(ProductDetailsRoot.self, from: data)
             return .success(root.product)
         } catch {
