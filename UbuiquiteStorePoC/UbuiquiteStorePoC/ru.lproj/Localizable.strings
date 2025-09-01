@@ -30,6 +30,12 @@
 "hardware" = "Аппаратное обеспечение";
 "software" = "Программное обеспечение";
 "loading_additional_details" = "Загрузка дополнительной информации...";
+"ios" = "iOS";
+"android" = "Android";
+"unifi_network" = "UniFi сеть";
+"security" = "Безопасность";
+"portal_features" = "Функции портала";
+
 
 /* Banner */
 "introducing" = "Представляем";

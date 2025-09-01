@@ -28,8 +28,8 @@ internal struct UProductDetailsRepository: ProductDetailsRepository {
 
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            let details = try JSONDecoder().decode(ProductDetails.self, from: data)
-            return .success(details)
+            let root = try JSONDecoder().decode(ProductDetailsRoot.self, from: data)
+            return .success(root.product)
         } catch {
             return .failure(error)
         }

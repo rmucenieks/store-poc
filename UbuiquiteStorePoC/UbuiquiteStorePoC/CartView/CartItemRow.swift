@@ -5,7 +5,6 @@ struct CartItemRow: View {
     let imgRepository: ImageRepository
     let onQuantityChange: ((Int) -> Void)?
     let onRemove: VoidFunc?
-    let onTap: ((Product) -> Void)?
 
     var body: some View {
         HStack(spacing: 12) {
@@ -58,7 +57,7 @@ struct CartItemRow: View {
                     onRemove?()
                 }) {
                     Image(systemName: "trash")
-                        .font(.caption)
+                        .font(.headline)
                         .foregroundColor(.red)
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -94,10 +93,6 @@ struct CartItemRow: View {
         .padding()
         .background(Color(.systemGray6))
         .cornerRadius(12)
-//        .onTapGesture {
-//            // Handle tap
-//            onTap?(item.product)
-//        }
     }
 }
 
@@ -107,8 +102,7 @@ struct CartItemRow: View {
         item: CartItem(product: Product.productDemoItem, quantity: 2),
         imgRepository: imgRepo,
         onQuantityChange: nil,
-        onRemove: nil,
-        onTap: nil
+        onRemove: nil
     )
     .padding()
 }

@@ -13,6 +13,8 @@ struct StoreView: View {
 
     @State private var showingLanguageSwitcher = false
     @State private var showingCart = false
+    @State private var showAddedToCart = false
+    @State private var alertProductName = ""
 
     public init(vm: StoreViewModel, cartModelVM: CartViewModel) {
         self.vm = vm
@@ -24,11 +26,11 @@ struct StoreView: View {
             VStack(spacing: 0) {
                 // Header
                 headerView
-                
                 // Content area with gradient overlay
                 ZStack(alignment: .top) {
                     ScrollView {
-                        VStack(spacing: 20) {
+                        VStack(spacing: 10) {
+                            Spacer() // 👈 Top inset
                             // Banner
                             BannerView(bannerItem: vm.bannerItem,
                                        storeURL: vm.storeURL)
@@ -44,42 +46,14 @@ struct StoreView: View {
                                     .padding(.top, 8)
                             }
                             .frame(maxWidth: .infinity, minHeight: 100)
-                        } else if !vm.categories.isEmpty {
+                        } else {
                             categoriesView
-                        }
-
-                        // Error Message
-                        if let errorMessage = vm.errorMessage {
-                            VStack(spacing: 12) {
-                                Image(systemName: "exclamationmark.triangle")
-                                    .font(.system(size: 32))
-                                    .foregroundColor(.orange)
-
-                                Text(vm.langHandler.localized("error"))
-                                    .font(.headline)
-                                    .fontWeight(.medium)
-
-                                Text(errorMessage)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                    .multilineTextAlignment(.center)
-
-                                Button(vm.langHandler.localized("retry")) {
-                                    Task {
-                                        await vm.loadCategories()
-                                    }
-                                }
-                                .buttonStyle(.borderedProminent)
-                            }
-                            .padding()
-                            .background(Color.orange.opacity(0.1))
-                            .cornerRadius(12)
                         }
 
                         // Products
                         productsView
-                    }
-                        .padding(.horizontal, vm.horizontalPadding)
+                        }
+                    .padding(.horizontal, vm.horizontalPadding)
                 }
                 
                 // Gradient overlay - positioned above scroll content
@@ -106,9 +80,6 @@ struct StoreView: View {
                 CartView(vm: cartModelVM)
             }
         }
-//        .sheet(isPresented: $showingLocalizationTest) {
-//            LocalizationTestView()
-//        }
     }
     
     private var headerView: some View {
@@ -192,21 +163,34 @@ struct StoreView: View {
             Text(vm.langHandler.localized("categories"))
                 .font(.headline)
                 .fontWeight(.semibold)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 12) {
-                    ForEach(vm.categories) { category in
-                        CategoryCard(
-                            category: category,
-                            isSelected: vm.selectedCategory?.id == category.id
-                        ) {
-                            Task {
-                                await vm.selectCategory(category)
+
+            if let errorMessage = vm.categoriesErrorMsg {
+                ErrorView(errorMessage: errorMessage,
+                          localizer: vm.langHandler,
+                          padding: vm.horizontalPadding) {
+                    Task {
+                        await vm.loadCategories()
+                    }
+                }.frame(maxWidth: .infinity) // 👈 Full width
+                    .padding(vm.horizontalPadding)
+                    .background(Color.orange.opacity(0.1))
+                    .cornerRadius(12)
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: 12) {
+                        ForEach(vm.categories) { category in
+                            CategoryCard(
+                                category: category,
+                                isSelected: vm.selectedCategoryId == category.id
+                            ) {
+                                Task {
+                                    await vm.selectCategory(category)
+                                }
                             }
                         }
                     }
+                    .padding(.horizontal, 4)
                 }
-                .padding(.horizontal, 4)
             }
         }
     }
@@ -217,9 +201,9 @@ struct StoreView: View {
                 Text(vm.langHandler.localized("products"))
                     .font(.headline)
                     .fontWeight(.semibold)
-                
+
                 Spacer()
-                
+
                 if !vm.products.isEmpty {
                     Text(String(format: vm.langHandler.localized("items_count"), vm.filteredProducts.count))
                         .font(.caption)
@@ -270,18 +254,55 @@ struct StoreView: View {
     private var productsGrid: some View {
         LazyVGrid(columns: gridColumns, spacing: 16) {
             ForEach(vm.filteredProducts) { product in
-////                //TODO: Check this! If this not initialized already Product Detaisl VM!!!
-                ///
-                NavigationLink(destination: ProductDetailView(vm: ProductDetailViewModel(product: product,
-                                                                                         repository: UProductDetailsRepository(localizer: vm.langHandler),
-                                                                                         imgRepository: UImageRepository(),
-                                                                                         localizer: vm.langHandler), cartViewModel: cartModelVM)) {
-                    ProductCard(product: product,
-                                imageURL: vm.imageURL(imageName: product.imageUrl),
-                                localizer: vm.langHandler,
-                                cartViewModel: cartModelVM)
+//            NavigationLink(value: product) {
+//                ProductCard(product: product,
+//                            imgRepository: UImageRepository(),
+//                            localizer: vm.langHandler,
+//                            cartViewModel: cartModelVM)
+//                .frame(maxWidth: .infinity)
+//                .contentShape(Rectangle()) // Ensures full area is tappable
+//                .background(Color.white)   // Or your card background
+//                .cornerRadius(12)
+//                .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
+//            }
+//            //.buttonStyle(PlainButtonStyle())
+//            .navigationDestination(for: Product.self) { product in
+//                ProductDetailView(
+//                    vm: ProductDetailViewModel(
+//                        product: product,
+//                        repository: UProductDetailsRepository(localizer: vm.langHandler),
+//                        imgRepository: UImageRepository(),
+//                        localizer: vm.langHandler
+//                    ),
+//                    cartViewModel: cartModelVM
+//                )
+//            }
+
+//FIXME: This approach initializes ProductDetailViewModel for each visible list product items. Solution is to use UIKit navigation or try with iOS16+ NavigationLink(value: product), which doesn't work as expected.
+            NavigationLink {
+                ProductDetailView(vm: ProductDetailViewModel(
+                    product: product,
+                    repository: UProductDetailsRepository(localizer: vm.langHandler),
+                    imgRepository: UImageRepository(),
+                    localizer: vm.langHandler
+                ), cartViewModel: cartModelVM)
+            } label: {
+                ProductCard(product: product,
+                            imgRepository: UImageRepository(),
+                            localizer: vm.langHandler,
+                            cartViewModel: cartModelVM, onTap: { prd in
+                    alertProductName = prd.name
+                    showAddedToCart = true
+                })
+            }
+            .buttonStyle(PlainButtonStyle())
+            .alert(alertProductName, isPresented: $showAddedToCart) {
+                Button(vm.langHandler.localized("ok")) {
                 }
-                .buttonStyle(PlainButtonStyle())
+            } message: {
+                Text(vm.langHandler.localized("product_added_successfully"))
+            }
+
             }
         }
     }

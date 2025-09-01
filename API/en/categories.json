@@ -1,6 +1,12 @@
 {
   "categories": [
     {
+      "id": "wifi",
+      "name": "WiFi",
+      "icon": "wifi",
+      "productsPath": "wifi-products.json"
+    },
+    {
       "id": "cloud-gateways",
       "name": "Cloud Gateways",
       "icon": "cloud.fill",
@@ -11,12 +17,6 @@
       "name": "Switching",
       "icon": "arrow.triangle.branch",
       "productsPath": ""
-    },
-    {
-      "id": "wifi",
-      "name": "WiFi",
-      "icon": "wifi",
-      "productsPath": "wifi-products.json"
     },
     {
       "id": "camera-security",

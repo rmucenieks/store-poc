@@ -24,9 +24,6 @@ internal struct UStoreRepository: StoreRepository {
             .appending(path: localizer.currentLangKey)
             .appending(path: APIServiceConstants.categoriesJSON)
         
-//        print("🌐 Fetching categories from: \(url?.absoluteString ?? "nil")")
-//        print("🌐 Current language: \(localizer.currentLangKey)")
-        
         guard let url = url else {
             print("❌ Failed to construct URL for categories")
             return .success([])
@@ -53,9 +50,6 @@ internal struct UStoreRepository: StoreRepository {
         let url = URL(string: APIServiceConstants.baseURL)?
             .appending(path: localizer.currentLangKey)
             .appending(path: productsFileName)
-
-//        print("🌐 Fetching products from: \(url?.absoluteString ?? "nil")")
-//        print("🌐 Products file: \(productsFileName)")
         
         guard let url = url else {
             print("❌ Failed to construct URL for products")

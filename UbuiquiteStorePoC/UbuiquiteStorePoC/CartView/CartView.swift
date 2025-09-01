@@ -87,8 +87,6 @@ struct CartView: View {
                             },
                             onRemove: {
                                 vm.removeFromCart(item: item)
-                            }, onTap: { product in
-
                             }
                         )
 

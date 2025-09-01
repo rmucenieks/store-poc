@@ -10,7 +10,3 @@ import UIKit
 public typealias VoidFunc = (() -> Void)
 public var isIPad: Bool = UIDevice.current.userInterfaceIdiom == .pad
 
-class AppUtilities {
-
-}
-

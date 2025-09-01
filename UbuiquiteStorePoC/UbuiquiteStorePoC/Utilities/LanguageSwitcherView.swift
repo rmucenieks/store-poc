@@ -2,7 +2,6 @@ import SwiftUI
 
 struct LanguageSwitcherView: View {
     @ObservedObject private var localization: LocalizationHandler
-
     @Environment(\.dismiss) private var dismiss
 
 
@@ -21,12 +20,12 @@ struct LanguageSwitcherView: View {
                         HStack {
                             Text(language.flag)
                                 .font(.title2)
-                            
+
                             Text(language.displayName)
                                 .foregroundColor(.primary)
-                            
+
                             Spacer()
-                            
+
                             if localization.currentLanguage == language {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.blue)
@@ -34,21 +33,14 @@ struct LanguageSwitcherView: View {
                             }
                         }
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .contentShape(Rectangle())
                 }
             }
             .navigationTitle(localization.localized("Language"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(localization.localized("Reset")) {
-                        localization.resetToDefaultLanguage()
-                    }
-                    .foregroundColor(.red)
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(localization.localized("Done")) {
+                    Button(localization.localized("close")) {
                         dismiss()
                     }
                 }
@@ -58,11 +50,6 @@ struct LanguageSwitcherView: View {
 }
 
 #Preview {
-//    let localizer =  MockLocalizer(overrides: [
-//        "Language": "Language",
-//        "Reset": "Reset",
-//        "Done": "Done",
-//    ])
     let handler = LocalizationHandler(language: .english)
     LanguageSwitcherView(localization: handler)
 }

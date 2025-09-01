@@ -9,16 +9,18 @@ import SwiftUI
 struct ProductCard: View {
     let vm: CartViewModel
     let product: Product
-    let imageURL: URL?
-    @State var showAddedToCart = false
+    let imgRepository: ImageRepository
+    let onTap: ((Product) -> Void)?
+//    @State var showAddedToCart = false
 
     init(product: Product,
-         imageURL: URL?,
+         imgRepository: ImageRepository,
          localizer: Localizer,
-         cartViewModel: CartViewModel) {
+         cartViewModel: CartViewModel, onTap: ((Product) -> Void)?) {
         self.product = product
-        self.imageURL = imageURL
+        self.imgRepository = imgRepository
         self.vm = cartViewModel
+        self.onTap = onTap
     }
 
     var body: some View {
@@ -27,9 +29,9 @@ struct ProductCard: View {
             ZStack(alignment: .topLeading) {
 
                 // Product Image
-                AsyncImage(url: imageURL) { image in
-                    image
-                        .resizable()
+                let url = imgRepository.getImageURL(for: product.imageUrl)
+                AsyncImage(url: url) { image in
+                    image.resizable()
                         .aspectRatio(contentMode: .fit)
                 } placeholder: {
                     Rectangle()
@@ -51,20 +53,9 @@ struct ProductCard: View {
                             .frame(width: 60, height: 30)
 
                         Spacer()
-                    }//.padding()
+                    }
                 }
             }
-
-//            if product.partnerProgram {
-//                HStack {
-//                    Image("PartnerProgram")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(width: 60, height: 30)
-//
-//                    Spacer()
-//                }
-//            }
 
             // Product Info
             VStack(alignment: .leading, spacing: 4) {
@@ -89,7 +80,7 @@ struct ProductCard: View {
                         .foregroundColor(.blue)
 
                     if let frequency = product.frequency {
-                        Text(String(format: vm.localizer.localized("frequency_separator"), frequency))
+                        Text(String("• \(frequency)"))
                             .font(.caption)
                             .foregroundColor(Color(.secondaryLabel))
                     }
@@ -105,7 +96,13 @@ struct ProductCard: View {
                 // Add to Cart Button
                 Button(action: {
                     vm.addToCart(product: product)
-                    showAddedToCart = true
+                    onTap?(product)
+//                    DispatchQueue.main.async {
+//                        withAnimation {
+//                            showAddedToCart = true
+//                        }
+//                    }
+                   // showAddedToCart = true
                 }) {
                     HStack {
                         Image(systemName: "cart.badge.plus")
@@ -121,12 +118,12 @@ struct ProductCard: View {
                     .cornerRadius(8)
                 }
                 .buttonStyle(PlainButtonStyle())
-                .alert(product.name, isPresented: $showAddedToCart) {
-                    Button(vm.localizer.localized("ok")) {
-                    }
-                } message: {
-                    Text(vm.localizer.localized("product_added_successfully"))
-                }
+//                .alert(product.name, isPresented: $showAddedToCart) {
+//                    Button(vm.localizer.localized("ok")) {
+//                    }
+//                } message: {
+//                    Text(vm.localizer.localized("product_added_successfully"))
+//                }
             }
         }
         .frame(height: 280) // Increased height to accommodate cart button
@@ -137,18 +134,22 @@ struct ProductCard: View {
     }
 }
 
-#Preview {
-    let mock = MockLocalizer(overrides: [
-        "frequency_separator": "",
-        "euro_symbol": "eur",
-        "add_to_cart": "Add to Cart"
-    ])
-    
-    let cartVM = CartViewModel(localizer: mock)
+struct ProductCard_Previews: PreviewProvider {
+    static var previews: some View {
+        let mock = MockLocalizer(overrides: [
+            "frequency_separator": "",
+            "euro_symbol": "EUR",
+            "add_to_cart": "Add to Cart"
+        ])
 
-    ProductCard(product: Product.productDemoItem,
-                imageURL: URL(string: "https://raw.githubusercontent.com/rmucenieks/store-pics/e7.avif"),
-                localizer: mock,
-                cartViewModel: cartVM)
+        let cartVM = CartViewModel(localizer: mock)
+        let imgRepo = MockImageRepository()
+        ProductCard(product: Product.productDemoItem,
+                    imgRepository: imgRepo,
+                    localizer: mock,
+                    cartViewModel: cartVM, onTap: nil)
+        .previewLayout(.sizeThatFits)
+        .padding(12) // Optional: adds breathing room in preview
+    }
 }
 

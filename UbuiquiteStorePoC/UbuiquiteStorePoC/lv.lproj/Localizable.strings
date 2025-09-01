@@ -30,6 +30,11 @@
 "hardware" = "Aparatūra";
 "software" = "Programmatūra";
 "loading_additional_details" = "Ielādē papildu informāciju...";
+"ios" = "iOS";
+"android" = "Android";
+"unifi_network" = "UniFi tīkls";
+"security" = "Drošība";
+"portal_features" = "Portāla funkcijas";
 
 /* Banner */
 "introducing" = "Iepazīstinām";

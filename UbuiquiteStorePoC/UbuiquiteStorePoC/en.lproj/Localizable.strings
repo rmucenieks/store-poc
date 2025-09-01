@@ -30,6 +30,13 @@
 "hardware" = "Hardware";
 "software" = "Software";
 "loading_additional_details" = "Loading additional details...";
+"ios" = "iOS";
+"android" = "Android";
+"unifi_network" = "UniFi Network";
+"security" = "Security";
+"portal_features" = "Portal Features";
+
+
 
 /* Banner */
 "introducing" = "Introducing";
