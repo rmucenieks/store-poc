@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "8132F792-2524-4FD7-B371-EEB621A88AF5",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:UbuiquiteStorePoC.xcodeproj",
+      "identifier" : "96C75E272E6274F200E6A973",
+      "name" : "UbuiquiteStorePoC"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:UbuiquiteStorePoC.xcodeproj",
+        "identifier" : "96C75E392E6274F400E6A973",
+        "name" : "UbuiquiteStorePoCTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:UbuiquiteStorePoC.xcodeproj",
+        "identifier" : "96C75E432E6274F400E6A973",
+        "name" : "UbuiquiteStorePoCUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
