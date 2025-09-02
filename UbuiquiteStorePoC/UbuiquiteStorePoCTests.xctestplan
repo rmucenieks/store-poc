@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "F2C31C42-89A8-4F2E-A72B-52C8956D5A84",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:UbuiquiteStorePoC.xcodeproj",
+        "identifier" : "96C75E392E6274F400E6A973",
+        "name" : "UbuiquiteStorePoCTests"
+      }
+    }
+  ],
+  "version" : 1
+}
